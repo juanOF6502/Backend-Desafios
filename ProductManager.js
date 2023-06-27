@@ -65,16 +65,20 @@ class ProductManager {
             return 
         }
 
-        products[productUpdate] = {
+        const oldProduct = products[productUpdate]
+        
+        const updatedProduct = {
             id,
-            title,
-            description,
-            price,
-            thumbnail,
-            code,
-            stock,
+            title: title ?? oldProduct.title,
+            description: description ?? oldProduct.description,
+            price: price ?? oldProduct.price,
+            thumbnail: thumbnail ?? oldProduct.thumbnail,
+            code: code ?? oldProduct.code,
+            stock: stock ?? oldProduct.stock,
         }
 
+        products[productUpdate] = updatedProduct
+        
         await fs.writeFile(this.path, JSON.stringify(products, null, 2))
     }
 
@@ -115,12 +119,8 @@ async function testing(){
     console.log(await newP.getProductById(1))
 
     await newP.updateProduct(1, {
-        title: 'producto prueba cambio',
-        description:'Este es un producto prueba cambio',
-        price:400,
-        thumbnail:'Sin imagen',
-        code:'dfg456',
-        stock:50
+        title: 'producto prueba nuevo',
+        price: 500
     })
     
     console.log(await newP.getProducts())
