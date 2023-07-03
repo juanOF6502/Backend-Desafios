@@ -3,6 +3,7 @@ const path = require('path')
 
 class ProductManager {
     constructor(){
+        this.products = []
         this.newId = 1
         this.path = path.join(__dirname, 'productos.json')
     }
@@ -40,14 +41,14 @@ class ProductManager {
 
     async getProducts(){
         const data = await fs.readFile(this.path, 'utf-8')
-        const products = JSON.parse(data)
-        return products
+        this.products = JSON.parse(data)
+        return this.products
     }
 
     async getProductById(id){
         const data = await fs.readFile(this.path, 'utf-8')
-        const products = JSON.parse(data)
-        const product = products.find(prod => prod.id === id)
+        this.products = JSON.parse(data)
+        const product = this.products.find(prod => prod.id === id)
         if (!product) {
             console.error('Invalid Product - Not found')
             return 
@@ -98,36 +99,4 @@ class ProductManager {
 }
 
 
-
-// PROCESO DE TESTING
-const newP = new ProductManager()
-
-async function testing(){
-    console.log(await newP.getProducts())
-
-    await newP.addProduct({
-        title: 'producto prueba',
-        description:'Este es un producto prueba',
-        price:200,
-        thumbnail:'Sin imagen',
-        code:'abc123',
-        stock:25
-    })
-
-    console.log(await newP.getProducts())
-
-    console.log(await newP.getProductById(1))
-
-    await newP.updateProduct(1, {
-        title: 'producto prueba nuevo',
-        price: 500
-    })
-    
-    console.log(await newP.getProducts())
-
-    await newP.deleteProduct(1)
-
-    console.log(await newP.getProducts())
-}
-
-testing()
+module.exports = ProductManager

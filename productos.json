@@ -1,1 +1,92 @@
-[]
+[
+  {
+    "id": 1,
+    "title": "Camiseta",
+    "description": "Camiseta de algodón de manga corta",
+    "price": 15.99,
+    "thumbnail": "camiseta.jpg",
+    "code": "C001",
+    "stock": 50
+  },
+  {
+    "id": 2,
+    "title": "Cámara digital",
+    "description": "Cámara digital con resolución de 20 megapíxeles",
+    "price": 299.99,
+    "thumbnail": "camara.jpg",
+    "code": "C002",
+    "stock": 50
+  },
+  {
+    "id": 3,
+    "title": "Altavoz Bluetooth",
+    "description": "Altavoz portátil con conectividad Bluetooth",
+    "price": 79.99,
+    "thumbnail": "altavoz.jpg",
+    "code": "A001",
+    "stock": 50
+  },
+  {
+    "id": 4,
+    "title": "Portátil",
+    "description": "Portátil ligero y potente",
+    "price": 999.99,
+    "thumbnail": "portatil.jpg",
+    "code": "P002",
+    "stock": 50
+  },
+  {
+    "id": 5,
+    "title": "Perfume",
+    "description": "Fragancia femenina con notas florales",
+    "price": 69.99,
+    "thumbnail": "perfume.jpg",
+    "code": "C001",
+    "stock": 50
+  },
+  {
+    "id": 6,
+    "title": "Gafas de sol",
+    "description": "Gafas de sol con protección UV",
+    "price": 39.99,
+    "thumbnail": "gafas.jpg",
+    "code": "G001",
+    "stock": 50
+  },
+  {
+    "id": 7,
+    "title": "Reloj de pulsera",
+    "description": "Reloj de pulsera con correa de acero inoxidable",
+    "price": 99.99,
+    "thumbnail": "reloj.jpg",
+    "code": "R001",
+    "stock": 50
+  },
+  {
+    "id": 8,
+    "title": "Bolso de mano",
+    "description": "Bolso de mano elegante",
+    "price": 29.99,
+    "thumbnail": "bolso.jpg",
+    "code": "B001",
+    "stock": 50
+  },
+  {
+    "id": 9,
+    "title": "Pantalones vaqueros",
+    "description": "Pantalones vaqueros de corte recto",
+    "price": 49.99,
+    "thumbnail": "pantalones.jpg",
+    "code": "P001",
+    "stock": 50
+  },
+  {
+    "id": 10,
+    "title": "Zapatos deportivos",
+    "description": "Zapatos deportivos para correr",
+    "price": 79.99,
+    "thumbnail": "zapatos.jpg",
+    "code": "Z001",
+    "stock": 50
+  }
+]
