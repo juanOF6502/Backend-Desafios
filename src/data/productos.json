@@ -79,14 +79,5 @@
     "thumbnail": "pantalones.jpg",
     "code": "P001",
     "stock": 50
-  },
-  {
-    "id": 10,
-    "title": "Zapatos deportivos",
-    "description": "Zapatos deportivos para correr",
-    "price": 79.99,
-    "thumbnail": "zapatos.jpg",
-    "code": "Z001",
-    "stock": 50
   }
 ]
