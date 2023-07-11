@@ -7,7 +7,7 @@
   "description": "Manejador de paqutes usado para los desafios del curso de Backend",
   "main": "app.js",
   "scripts": {
-    "start:express": "nodemon app.js"
+    "start:express": "nodemon src/app.js"
   },
   "keywords": [
     "backend",
