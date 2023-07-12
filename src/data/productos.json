@@ -6,7 +6,9 @@
     "price": 15.99,
     "thumbnail": "camiseta.jpg",
     "code": "C001",
-    "stock": 50
+    "stock": 50,
+    "status": true,
+    "category": "Ropa"
   },
   {
     "id": 2,
@@ -15,7 +17,9 @@
     "price": 299.99,
     "thumbnail": "camara.jpg",
     "code": "C002",
-    "stock": 50
+    "stock": 50,
+    "status": true,
+    "category": "Electrónica"
   },
   {
     "id": 3,
@@ -24,7 +28,9 @@
     "price": 79.99,
     "thumbnail": "altavoz.jpg",
     "code": "A001",
-    "stock": 50
+    "stock": 50,
+    "status": true,
+    "category": "Electrónica"
   },
   {
     "id": 4,
@@ -33,7 +39,9 @@
     "price": 999.99,
     "thumbnail": "portatil.jpg",
     "code": "P002",
-    "stock": 50
+    "stock": 50,
+    "status": true,
+    "category": "Electrónica"
   },
   {
     "id": 5,
@@ -42,7 +50,9 @@
     "price": 69.99,
     "thumbnail": "perfume.jpg",
     "code": "C001",
-    "stock": 50
+    "stock": 50,
+    "status": true,
+    "category": "Belleza"
   },
   {
     "id": 6,
@@ -51,7 +61,9 @@
     "price": 39.99,
     "thumbnail": "gafas.jpg",
     "code": "G001",
-    "stock": 50
+    "stock": 50,
+    "status": true,
+    "category": "Accesorios"
   },
   {
     "id": 7,
@@ -60,7 +72,9 @@
     "price": 99.99,
     "thumbnail": "reloj.jpg",
     "code": "R001",
-    "stock": 50
+    "stock": 50,
+    "status": true,
+    "category": "Accesorios"
   },
   {
     "id": 8,
@@ -69,7 +83,9 @@
     "price": 29.99,
     "thumbnail": "bolso.jpg",
     "code": "B001",
-    "stock": 50
+    "stock": 50,
+    "status": true,
+    "category": "Accesorios"
   },
   {
     "id": 9,
@@ -78,6 +94,19 @@
     "price": 49.99,
     "thumbnail": "pantalones.jpg",
     "code": "P001",
-    "stock": 50
+    "stock": 50,
+    "status": true,
+    "category": "Ropa"
+  },
+  {
+    "id": 10,
+    "title": "Zapatillas",
+    "description": "Zapatillas deportivas",
+    "price": 49.99,
+    "thumbnail": "zapatilas.jpg",
+    "code": "Z001",
+    "stock": 50,
+    "status": true,
+    "category": "Calzado"
   }
 ]

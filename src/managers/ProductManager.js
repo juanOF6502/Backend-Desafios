@@ -53,13 +53,15 @@ class ProductManager {
             return
         }
 
-        const {title, description, price, thumbnail, code, stock} = product
+        const {title, description, price, thumbnail, status, code, category, stock} = product
 
         existingProduct.title = title
         existingProduct.description = description
         existingProduct.price = price
         existingProduct.thumbnail = thumbnail
+        existingProduct.status = status
         existingProduct.code = code
+        existingProduct.category = category
         existingProduct.stock = stock
 
         await this.#writeFile()
