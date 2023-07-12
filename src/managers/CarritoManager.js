@@ -30,14 +30,14 @@ class CarritoManager {
         return this.#carritos.find(p => p.id == id)
     }
 
-    async createCart(cart){
+    async createCart(){
         await this.#readFile()
 
         const id = (this.#carritos[this.#carritos.length - 1]?.id || 0) + 1
 
         const newCart = {
             id,
-            ...cart
+            products: []
         }
         
         this.#carritos.push(newCart)

@@ -5,9 +5,7 @@ const carritoManager = new CarritoManager()
 const router = Router()
 
 router.post('/', async(req, res) => {
-    const { body } = req
-
-    const cart = await carritoManager.createCart(body)
+    const cart = await carritoManager.createCart()
 
     res.send(cart)
 })

@@ -4,8 +4,8 @@ const CarritoRouter = require('./api/carts.router');
 
 const router = Router()
 
-router.use('/api/products', ProductRouter)
-router.use('/api/carts', CarritoRouter)
+router.use('/products', ProductRouter)
+router.use('/carts', CarritoRouter)
 
 
 module.exports = {

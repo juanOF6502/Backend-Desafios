@@ -45,10 +45,12 @@ router.get('/:pid', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const { body } = req
-
-    const product = await productManager.createProduct(body)
-
-    res.send(product)
+    try {
+        const product = await productManager.createProduct(body)
+        res.status(201).send(product) 
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
 })
 
 router.put('/:pid', async (req, res) => {

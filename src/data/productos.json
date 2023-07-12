@@ -1,112 +1,112 @@
 [
   {
     "id": 1,
-    "title": "Camiseta",
-    "description": "Camiseta de algodón de manga corta",
-    "price": 15.99,
-    "thumbnail": "camiseta.jpg",
-    "code": "C001",
-    "stock": 50,
-    "status": true,
-    "category": "Ropa"
-  },
-  {
-    "id": 2,
-    "title": "Cámara digital",
-    "description": "Cámara digital con resolución de 20 megapíxeles",
-    "price": 299.99,
-    "thumbnail": "camara.jpg",
-    "code": "C002",
-    "stock": 50,
-    "status": true,
-    "category": "Electrónica"
-  },
-  {
-    "id": 3,
-    "title": "Altavoz Bluetooth",
-    "description": "Altavoz portátil con conectividad Bluetooth",
-    "price": 79.99,
-    "thumbnail": "altavoz.jpg",
-    "code": "A001",
-    "stock": 50,
-    "status": true,
-    "category": "Electrónica"
-  },
-  {
-    "id": 4,
-    "title": "Portátil",
-    "description": "Portátil ligero y potente",
-    "price": 999.99,
-    "thumbnail": "portatil.jpg",
-    "code": "P002",
-    "stock": 50,
-    "status": true,
-    "category": "Electrónica"
-  },
-  {
-    "id": 5,
-    "title": "Perfume",
-    "description": "Fragancia femenina con notas florales",
-    "price": 69.99,
-    "thumbnail": "perfume.jpg",
-    "code": "C001",
-    "stock": 50,
-    "status": true,
-    "category": "Belleza"
-  },
-  {
-    "id": 6,
-    "title": "Gafas de sol",
-    "description": "Gafas de sol con protección UV",
-    "price": 39.99,
-    "thumbnail": "gafas.jpg",
-    "code": "G001",
-    "stock": 50,
-    "status": true,
-    "category": "Accesorios"
-  },
-  {
-    "id": 7,
-    "title": "Reloj de pulsera",
-    "description": "Reloj de pulsera con correa de acero inoxidable",
-    "price": 99.99,
-    "thumbnail": "reloj.jpg",
-    "code": "R001",
-    "stock": 50,
-    "status": true,
-    "category": "Accesorios"
-  },
-  {
-    "id": 8,
-    "title": "Bolso de mano",
-    "description": "Bolso de mano elegante",
-    "price": 29.99,
-    "thumbnail": "bolso.jpg",
-    "code": "B001",
-    "stock": 50,
-    "status": true,
-    "category": "Accesorios"
-  },
-  {
-    "id": 9,
-    "title": "Pantalones vaqueros",
-    "description": "Pantalones vaqueros de corte recto",
-    "price": 49.99,
-    "thumbnail": "pantalones.jpg",
-    "code": "P001",
-    "stock": 50,
-    "status": true,
-    "category": "Ropa"
-  },
-  {
-    "id": 10,
-    "title": "Zapatillas",
-    "description": "Zapatillas deportivas",
-    "price": 49.99,
-    "thumbnail": "zapatilas.jpg",
+    "title": "The Legend of Zelda: Breath of the Wild",
+    "description": "Videojuego de acción y aventura para Nintendo Switch",
+    "price": 59.99,
+    "thumbnail": "zelda.jpg",
     "code": "Z001",
     "stock": 50,
     "status": true,
-    "category": "Calzado"
+    "category": "Videojuegos"
+  },
+  {
+    "id": 2,
+    "title": "Super Mario Odyssey",
+    "description": "Videojuego de plataformas para Nintendo Switch",
+    "price": 49.99,
+    "thumbnail": "mario.jpg",
+    "code": "M001",
+    "stock": 50,
+    "status": true,
+    "category": "Videojuegos"
+  },
+  {
+    "id": 3,
+    "title": "Grand Theft Auto V",
+    "description": "Videojuego de acción y aventura para PlayStation 4 y Xbox One",
+    "price": 39.99,
+    "thumbnail": "gta5.jpg",
+    "code": "G001",
+    "stock": 50,
+    "status": true,
+    "category": "Videojuegos"
+  },
+  {
+    "id": 4,
+    "title": "The Last of Us Part II",
+    "description": "Videojuego de acción y aventura para PlayStation 4",
+    "price": 59.99,
+    "thumbnail": "tlou2.jpg",
+    "code": "T001",
+    "stock": 50,
+    "status": true,
+    "category": "Videojuegos"
+  },
+  {
+    "id": 5,
+    "title": "Minecraft",
+    "description": "Videojuego de sandbox disponible en varias plataformas",
+    "price": 29.99,
+    "thumbnail": "minecraft.jpg",
+    "code": "M002",
+    "stock": 50,
+    "status": true,
+    "category": "Videojuegos"
+  },
+  {
+    "id": 6,
+    "title": "FIFA 22",
+    "description": "Videojuego de simulación deportiva para PlayStation 5 y Xbox Series X/S",
+    "price": 69.99,
+    "thumbnail": "fifa22.jpg",
+    "code": "F001",
+    "stock": 50,
+    "status": true,
+    "category": "Videojuegos"
+  },
+  {
+    "id": 7,
+    "title": "Call of Duty: Warzone",
+    "description": "Videojuego de battle royale disponible en varias plataformas",
+    "price": 0,
+    "thumbnail": "warzone.jpg",
+    "code": "C001",
+    "stock": 50,
+    "status": true,
+    "category": "Videojuegos"
+  },
+  {
+    "id": 8,
+    "title": "Assassin's Creed Valhalla",
+    "description": "Videojuego de rol y acción para PlayStation 5 y Xbox Series X/S",
+    "price": 49.99,
+    "thumbnail": "acvalhalla.jpg",
+    "code": "A001",
+    "stock": 50,
+    "status": true,
+    "category": "Videojuegos"
+  },
+  {
+    "id": 9,
+    "title": "Pokémon Sword",
+    "description": "Videojuego de rol para Nintendo Switch",
+    "price": 59.99,
+    "thumbnail": "pokemon.jpg",
+    "code": "P002",
+    "stock": 50,
+    "status": true,
+    "category": "Videojuegos"
+  },
+  {
+    "id": 10,
+    "title": "Cyberpunk 2077",
+    "description": "Videojuego de rol y acción para PlayStation 4, Xbox One y PC",
+    "price": 49.99,
+    "thumbnail": "cyberpunk.jpg",
+    "code": "C002",
+    "stock": 50,
+    "status": true,
+    "category": "Videojuegos"
   }
 ]
