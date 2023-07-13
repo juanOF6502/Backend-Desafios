@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 
     if(search){
         console.log(`Buscando productos con "${search}"`)
-        productstFilter = products.filter(p => p.title.includes(search) || p.description.includes(search))
+        productstFilter = products.filter(p => p.title.toLowerCase().includes(search) || p.description.toLowerCase().includes(search))
         res.send(productstFilter)
     }else if(limit){
         console.log(`Busqueda limitada a ${limit} productos`)
