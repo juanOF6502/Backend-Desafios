@@ -42,21 +42,21 @@ Parámetros:
 
 # Routers:
 ## Carrito API Router: Endpoints
-### POST /api/carritos/
+### POST /api/carts/
     Crea un nuevo carrito.
     Respuesta exitosa (Código 200):
     El cuerpo de la respuesta contiene el carrito recién creado.
-### GET /api/carritos/
+### GET /api/carts/
     Obtiene todos los carritos.
     Respuesta exitosa (Código 200):
     El cuerpo de la respuesta contiene una matriz de objetos que representan los carritos almacenados.
-### GET /api/carritos/:cid
+### GET /api/carts/:cid
     Obtiene los productos de un carrito por su ID.
 
     Parámetros de ruta: :cid - El ID del carrito.
     Respuesta exitosa (Código 200): El cuerpo de la respuesta contiene una matriz de objetos que representan los productos del carrito especificado.
     Respuesta de error (Código 404): No se encontró ningún carrito con el ID especificado.
-### POST /api/carritos/:cid/product/:pid
+### POST /api/carts/:cid/product/:pid
     Agrega un producto a un carrito existente.
 
     Parámetros de ruta: :cid - El ID del carrito.
@@ -64,32 +64,32 @@ Parámetros:
     Respuesta exitosa (Código 200): El cuerpo de la respuesta contiene el carrito actualizado con el producto agregado.
 
 ## Productos API Router: Endpoints
-### GET /api/productos/
+### GET /api/products/
     Obtiene todos los productos.
 
     Parámetros de consulta: search (opcional) - Una cadena de texto para buscar productos por título o descripción.
                             limit (opcional) - El número máximo de productos a devolver.
     Respuesta exitosa (Código 200): El cuerpo de la respuesta contiene una matriz de objetos que representan los productos filtrados o sin filtrar.
-### GET /api/productos/:pid
+### GET /api/products/:pid
     Obtiene un producto por su ID.
 
     Parámetros de ruta: :pid - El ID del producto.
     Respuesta exitosa (Código 200): El cuerpo de la respuesta contiene el producto encontrado.
     Respuesta de error (Código 404): No se encontró ningún producto con el ID especificado.
-### POST /api/productos/
+### POST /api/products/
     Crea un nuevo producto.
 
     Parámetros de cuerpo: title, description, price, thumbnail, code, category y stock.
     Respuesta exitosa (Código 201): El cuerpo de la respuesta contiene el producto recién creado.
     Respuesta de error (Código 400): El cuerpo de la respuesta contiene un objeto de error si faltan campos requeridos.
-### PUT /api/productos/:pid
+### PUT /api/products/:pid
     Actualiza un producto existente.
 
     Parámetros de ruta: :pid - El ID del producto.
     Parámetros de cuerpo: Se pueden proporcionar campos opcionales para actualizar el producto.
     Respuesta exitosa (Código 200): Se envía cuando se actualiza exitosamente el producto.
     Respuesta de error (Código 404): No se encontró ningún producto con el ID especificado.
-### DELETE /api/productos/:pid
+### DELETE /api/products/:pid
     Elimina un producto.
 
     Parámetros de ruta: :pid - El ID del producto.
