@@ -2,6 +2,8 @@ const express = require('express')
 const { api } = require('./routes')
 const app = express()
 
+app.set('json spaces', 2);
+
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
