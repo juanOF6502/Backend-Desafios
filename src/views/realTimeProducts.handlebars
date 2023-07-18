@@ -1,6 +1,32 @@
+<div id="product-form" class="row mx-auto mb-5">
+    <div class="col-md-6">
+        <form id="add-product-form" onsubmit="addProduct(event)">
+            <h4>Agregar Producto</h4>
+            <input class="form-control" type="text" id="product-title" placeholder="Título" required>
+            <input class="form-control" type="number" step="0.01" min="0" id="product-price" placeholder="Precio" required>
+            <input class="form-control" type="text" id="product-description" placeholder="Descripción" required>
+            <input class="form-control" type="text" id="product-thumbnail" placeholder="Ruta de imagen" required>
+            <input class="form-control" type="text" id="product-code" placeholder="Código" required>
+            <input class="form-control" type="number" id="product-stock" placeholder="Stock" required>
+            <select class="form-control" id="product-status" required>
+                <option value="true">Disponible</option>
+                <option value="false">No disponible</option>
+            </select>
+            <input class="form-control" type="text" id="product-category" placeholder="Categoría" required>
+            <button type="submit" class="btn btn-primary mt-2">Agregar</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <form id="delete-product-form" onsubmit="deleteProduct(event)">
+            <h4>Borrar Producto</h4>
+            <input class="form-control" type="number" id="product-id" placeholder="ID del producto a borrar" required>
+            <button type="submit" class="btn btn-danger mt-2">Borrar</button>
+        </form>
+    </div>
+</div>
 <div id="products" class="row">
         {{#each products}}
-        <div id="product" class="col-md-3">
+        <div class="col-md-3">
             <div class="card mb-5 box-shadow">
                 <img src="static/img/{{this.thumbnail}}" alt="imagen" class="card-img-top card-img-custom">
                 <div class="card-body">
@@ -13,6 +39,7 @@
         </div>
         {{/each}}
 </div>
+
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/static/js/index.js"></script>

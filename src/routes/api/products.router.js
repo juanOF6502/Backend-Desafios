@@ -1,6 +1,5 @@
 const { Router } = require('express')
 const ProductManager = require('../../managers/ProductManager')
-const socketManager = require('../../websocket/index')
 
 const productManager = new ProductManager()
 const router = Router()
@@ -22,11 +21,9 @@ router.get('/', async (req, res) => {
         console.log(`Busqueda limitada a ${limit} productos`)
         const limitValue = parseInt(limit)
         productstFilter = productstFilter.slice(0, limitValue)
-        
     } 
 
     res.send(productstFilter)
-    socketManager.setProducts(productstFilter)
 })
 
 router.get('/:pid', async (req, res) => {
@@ -50,7 +47,7 @@ router.post('/', async (req, res) => {
     const { body } = req
     try {
         const product = await productManager.createProduct(body)
-        res.status(201).send(product) 
+        res.status(201).send(product)
     } catch (error) {
         res.status(400).send({ error: error.message })
     }
