@@ -1,8 +1,10 @@
 const { Router } = require('express')
 const ProductManager = require('../../managers/ProductManager')
+const socketManager = require('../../websocket/index')
 
 const productManager = new ProductManager()
 const router = Router()
+
 
 
 router.get('/', async (req, res) => {
@@ -10,20 +12,21 @@ router.get('/', async (req, res) => {
 
     const products = await productManager.getProducts()
     let productstFilter = products
+    console.log('Buscando productos...')
 
     if(search){
         console.log(`Buscando productos con "${search}"`)
         productstFilter = products.filter(p => p.title.toLowerCase().includes(search) || p.description.toLowerCase().includes(search))
-        res.send(productstFilter)
-    }else if(limit){
+    }
+    if(limit){
         console.log(`Busqueda limitada a ${limit} productos`)
         const limitValue = parseInt(limit)
         productstFilter = productstFilter.slice(0, limitValue)
-        res.send(productstFilter)
-    } else {
-        console.log(`Buscando productos...`)
-        res.send(productstFilter)
-    }
+        
+    } 
+
+    res.send(productstFilter)
+    socketManager.setProducts(productstFilter)
 })
 
 router.get('/:pid', async (req, res) => {

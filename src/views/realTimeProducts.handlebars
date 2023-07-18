@@ -1,0 +1,18 @@
+<div id="products" class="row">
+        {{#each products}}
+        <div id="product" class="col-md-3">
+            <div class="card mb-5 box-shadow">
+                <img src="static/img/{{this.thumbnail}}" alt="imagen" class="card-img-top card-img-custom">
+                <div class="card-body">
+                    <h3 class="card-title">{{ this.title }}</h3>
+                    <h5>USD ${{ this.price }}</h5>
+                    <p>{{ this.description }}</p>
+                    <button onclick="addToCart({{ this.id }})" class="btn btn-dark btn-sm">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/index.js"></script>
