@@ -16,3 +16,31 @@ body {
     width: 100%;
     height: 450px;
 }
+
+.text-animation{
+    animation: pestañar 3s ease-in-out infinite;
+}
+
+@keyframes pestañar{
+    0% {
+		opacity: 1;
+        color: rgb(46, 91, 240);
+	}
+
+	50% {
+		opacity: 0.2;
+        color: rgba(46, 91, 240, 0.692);
+	}
+
+	100% {
+		opacity: 1;
+        color: rgb(46, 91, 240);
+	}
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

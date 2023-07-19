@@ -24,5 +24,12 @@ router.get('/realtimeproducts', async(req, res) => {
     })
 })
 
+router.get('/carrito', (req, res) => {
+    res.render('carrito', {
+        title: 'Carrito',
+        style: 'home'
+    })
+})
+
 
 module.exports = router
