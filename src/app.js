@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const http = require('http')
+
 const { Server } = require("socket.io")
 const handlebars = require('express-handlebars')
 const socketManager = require('./websocket')
@@ -24,7 +25,10 @@ app.set('json spaces', 2)
 
 // Rutas / Router
 app.use('/', Routes.home)
-app.use('/api', Routes.api)
+app.use('/api', (req, res, next) => {
+    req.io = io
+    next()
+}, Routes.api)
 
 // WebSocket
 io.on('connection', socketManager)

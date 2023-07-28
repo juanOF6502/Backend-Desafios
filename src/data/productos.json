@@ -8,7 +8,11 @@
     "code": "Z001",
     "stock": 50,
     "status": true,
-    "category": "Videojuegos"
+    "category": [
+      "Aventura",
+      "Fantasía",
+      "Mundo Abierto"
+    ]
   },
   {
     "id": 2,
@@ -19,7 +23,11 @@
     "code": "M001",
     "stock": 50,
     "status": true,
-    "category": "Videojuegos"
+    "category": [
+      "Aventura",
+      "Exploración",
+      "Plataformas"
+    ]
   },
   {
     "id": 3,
@@ -30,7 +38,11 @@
     "code": "G001",
     "stock": 50,
     "status": true,
-    "category": "Videojuegos"
+    "category": [
+      "Acción",
+      "Mundo Abierto",
+      "Crimen"
+    ]
   },
   {
     "id": 4,
@@ -41,7 +53,11 @@
     "code": "T001",
     "stock": 50,
     "status": true,
-    "category": "Videojuegos"
+    "category": [
+      "Acción",
+      "Supervivencia",
+      "Zombis"
+    ]
   },
   {
     "id": 5,
@@ -52,7 +68,11 @@
     "code": "M002",
     "stock": 50,
     "status": true,
-    "category": "Videojuegos"
+    "category": [
+      "Aventura",
+      "Exploración",
+      "Construcción"
+    ]
   },
   {
     "id": 6,
@@ -63,7 +83,10 @@
     "code": "F001",
     "stock": 50,
     "status": true,
-    "category": "Videojuegos"
+    "category": [
+      "Deportes",
+      "Fútbol"
+    ]
   },
   {
     "id": 7,
@@ -74,7 +97,10 @@
     "code": "C001",
     "stock": 50,
     "status": true,
-    "category": "Videojuegos"
+    "category": [
+      "FPS",
+      "Multijugador"
+    ]
   },
   {
     "id": 8,
@@ -85,7 +111,11 @@
     "code": "A001",
     "stock": 50,
     "status": true,
-    "category": "Videojuegos"
+    "category": [
+      "Acción",
+      "Aventura",
+      "Histórico"
+    ]
   },
   {
     "id": 9,
@@ -96,7 +126,11 @@
     "code": "P002",
     "stock": 50,
     "status": true,
-    "category": "Videojuegos"
+    "category": [
+      "Aventura",
+      "RPG",
+      "Coleccionables"
+    ]
   },
   {
     "id": 10,
@@ -107,6 +141,10 @@
     "code": "C003",
     "stock": 50,
     "status": true,
-    "category": "Videojuegos"
+    "category": [
+      "Acción",
+      "Mundo Abierto",
+      "Ciencia Ficción"
+    ]
   }
 ]

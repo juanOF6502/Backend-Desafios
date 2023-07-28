@@ -24,17 +24,17 @@ body {
 @keyframes pestañar{
     0% {
 		opacity: 1;
-        color: rgb(46, 91, 240);
+        color: rgb(129, 155, 238);
 	}
 
 	50% {
 		opacity: 0.2;
-        color: rgba(46, 91, 240, 0.692);
+        color: rgba(129, 155, 238, 0.692);
 	}
 
 	100% {
 		opacity: 1;
-        color: rgb(46, 91, 240);
+        color: rgb(129, 155, 238);
 	}
 }
 

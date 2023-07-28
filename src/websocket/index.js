@@ -13,16 +13,6 @@ function socketManager(socket) {
         console.log(`Cliente desconectado: ${socket.id}`)
     })
 
-    socket.on('addProduct', async (newProduct) => {
-        try {
-            await productManager.createProduct(newProduct)
-            const products = await productManager.getProducts()
-            socket.emit('products', products)
-        } catch (error) {
-            console.error(error)
-        }
-    })
-
     socket.on('deleteProduct', async (productId) => {
         await productManager.deleteProduct(productId)
         const products = await productManager.getProducts()

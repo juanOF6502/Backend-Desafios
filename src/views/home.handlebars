@@ -5,6 +5,11 @@
             <img src="static/img/{{this.thumbnail}}" alt="imagen" class="card-img-top card-img-custom">
             <div class="card-body">
                 <h3 class="card-title">{{ this.title }}</h3>
+                <div class="d-flex flex-wrap"> 
+                    {{#each this.category}}
+                        <p class="text-light bg-info rounded mx-1 px-1 fs-6">{{ this }}</p>
+                    {{/each}}
+                </div>
                 <h5>USD ${{ this.price }}</h5>
                 <p>{{ this.description }}</p>
                 <button onclick="addToCart({{ this.id }})" class="btn btn-dark btn-sm">Agregar al carrito</button>
