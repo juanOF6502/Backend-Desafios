@@ -29,7 +29,7 @@ class CarritoManager {
                 throw new Error('Product not found')
             }
     
-            const existingProduct = cart.products.find(p => p._id.toString() === product._id.toString())
+            const existingProduct = cart.products.find(p => p._id == product._id)
     
             if (existingProduct) {
                 existingProduct.qty += 1
