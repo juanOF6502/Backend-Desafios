@@ -14,7 +14,10 @@ socket.on('products', (products) => {
 
 socket.on('newProduct', (product) => {
     addProductByIO(product)
-    updateProductsView()
+})
+
+socket.on('deleteProduct', (pid) => {
+    deleteProductByIO(pid)
 })
 
 function updateProductsView(products) {
@@ -31,7 +34,7 @@ function updateProductsView(products) {
                     <div class="card-body">
                         <h3 class="card-title">${product.title}</h3>
                         <div class="d-flex flex-wrap">
-                            ${product.category.map((category) => `<p class="text-light bg-info rounded mx-1 px-2 fs-6">${category}</p>`)
+                            ${product.category.map((category) =>  `<p class="text-light bg-info rounded mx-1 px-2 fs-6">${category.charAt(0).toUpperCase() + category.slice(1)}</p>`)
                                 .join('')
                             }
                         </div>
@@ -51,6 +54,7 @@ function addProductByIO(product){
     const realTimeProducts = document.querySelector('#products')
     const div = document.createElement('div')
     div.classList.add('col-12', 'col-sm-6', 'col-md-4' ,'col-lg-3')
+    div.dataset.productId = product._id;
     div.innerHTML = `
         <div class="card mb-5 box-shadow">
             <img src="static/img/${product.thumbnail}" alt="imagen" class="card-img-top card-img-custom">
@@ -70,11 +74,9 @@ function addProductByIO(product){
     realTimeProducts.appendChild(div)
 }
 
-function deleteProduct(event) {
-    event.preventDefault();
-    const productId = document.getElementById('product-id').value
-    
-    socket.emit('deleteProduct', productId)
-
-    document.querySelector('#product-id').value = ''
+function deleteProductByIO(pid){
+    const productToDelete = document.querySelector(`[data-product-id="${pid}"]`);
+    if (productToDelete) {
+        productToDelete.remove();
+    }
 }

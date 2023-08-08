@@ -1,22 +1,29 @@
-<div id="product-form" class="row mx-auto mb-5">
-    <div class="col-md-3">
-        <form id="delete-product-form" onsubmit="deleteProduct(event)">
-            <h4>Borrar Producto</h4>
-            <input class="form-control" type="number" id="product-id" placeholder="ID del producto" required>
-            <button type="submit" class="btn btn-danger mt-2 rounded">Borrar</button>
-        </form>
-    </div>
+<div class="container mb-5">
+        <h3>ENCONTRA EN NUESTRA TIENDA</h3>
+        <h2 class="roller">
+            <span class="rolltext">
+                ACCION <br/>
+                AVENTURA <br/>
+                EXPLORACION <br/>
+                FANTASIA <br>
+                MUNDO ABIERTO <br>
+                SUPERVIVENCIA <br>
+                FPS <br>
+                RPG <br>
+                Y MAS... <br>
+            </span>
+        </h2>
 </div>
 <div id="products" class="row">
         {{#each products}}
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-product-id="{{ this._id }}">
             <div class="card mb-5 box-shadow">
-                <img src="static/img/{{this.thumbnail}}" alt="imagen" class="card-img-top card-img-custom">
+                <img src="http://localhost:8080/static/img/{{this.thumbnail}}" alt="imagen" class="card-img-top card-img-custom">
                 <div class="card-body">
                     <h3 class="card-title">{{ this.title }}</h3>
                     <div class="d-flex flex-wrap"> 
                         {{#each this.category}}
-                            <p class="text-light bg-info rounded mx-1 px-2 fs-6">{{ this }}</p>
+                            <p class="text-light bg-info rounded mx-1 px-1 fs-6">{{ this }}</p>
                         {{/each}}
                     </div>
                     <h5>USD ${{ this.price }}</h5>
@@ -27,7 +34,5 @@
         </div>
         {{/each}}
 </div>
-
-
 <script src="/socket.io/socket.io.js"></script>
 <script src="/static/js/index.js"></script>

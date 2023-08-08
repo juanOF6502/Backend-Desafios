@@ -1,7 +1,6 @@
 const { Router } = require('express')
-const ProductManager = require('../../managers/ProductManager')
 
-const productManager = new ProductManager()
+const productManagerMDB = require('../../managers/product.manager')
 const router = Router()
 
 
@@ -9,7 +8,7 @@ const router = Router()
 router.get('/', async (req, res) => {
     const {search, limit} = req.query
 
-    const products = await productManager.getProducts()
+    const products = await productManagerMDB.getProducts()
     let productstFilter = products
     console.log('Buscando productos...')
 
@@ -27,14 +26,14 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:pid', async (req, res) => {
-    const products = await productManager.getProducts()
+    const products = await productManagerMDB.getProducts()
 
-    const pid = parseInt(req.params.pid)
+    const pid = req.params.pid
 
     console.log(`Buscando producto con ID ${pid}`)
 
     for (const p of products){
-        if(p.id === pid) {
+        if(p._id == pid) {
             res.send(p)
             return
         }
@@ -46,7 +45,7 @@ router.get('/:pid', async (req, res) => {
 router.post('/', async (req, res) => {
     const { body, io } = req
     try {
-        const product = await productManager.createProduct(body)
+        const product = await productManagerMDB.createProduct(body)
         io.emit('newProduct', product)
         res.status(201).send(product)
     } catch (error) {
@@ -58,24 +57,26 @@ router.put('/:pid', async (req, res) => {
     const { pid } = req.params
     const { body } = req
     
-    if(!await productManager.getProductById(pid)){
+    if(!await productManagerMDB.getProductById(pid)){
         res.sendStatus(404)
         return
     }
 
-    await productManager.saveProduct(pid, body)
+    await productManagerMDB.saveProduct(pid, body)
     res.sendStatus(200)
 })
 
 router.delete('/:pid', async (req, res) => {
     const { pid } = req.params
+    const { io } = req
 
-    if(!await productManager.getProductById(pid)){
+    if(!await productManagerMDB.getProductById(pid)){
         res.sendStatus(404)
         return
     }
 
-    await productManager.deleteProduct(pid)
+    await productManagerMDB.deleteProduct(pid)
+    io.emit('deleteProduct', pid)
     res.sendStatus(200)
 })
 

@@ -11,8 +11,6 @@ api.use('/carts', CarritoRouter)
 const home = Router()
 
 home.use('/', HomeRoutes)
-home.use('/realtimeproducts', HomeRoutes)
-
 
 module.exports = {
     api,

@@ -1,9 +1,17 @@
 <div class="container mt-5 mb-5">
-        <div class="card">
-            <div class="card-body text-center">
-                <h5 class="card-title">Página en Construcción</h5>
-                <p class="card-text">La siguiente pagina estara disponible proximamente.</p>
-            </div>
-            <img src="/static/img/underconstruction.png" class="card-img-bottom rounded" alt="Imagen">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title text-center">Detalle del Carrito</h5>
+            <ul class="list-group">
+                {{#each products}}
+                    <li class="list-group-item bg-dark text-light d-flex justify-content-between align-items-start w-50 mx-auto rounded">
+                        <span><strong>{{this.title}}</strong></span>
+                        <span>X <strong>{{this.qty}}</strong></span>
+                    </li>
+                {{/each}}
+            </ul>
         </div>
+    </div>
+    <p>*Carrito de prueba con MongoDB*</p>
+    <p>*La funcion de obtener el carrito por user especifico todavia en desarrolo*</p>
 </div>
