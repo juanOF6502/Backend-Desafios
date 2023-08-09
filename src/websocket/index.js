@@ -1,5 +1,6 @@
 const chatManager = require('../managers/chat.manager')
 const productManager = require('../managers/product.manager')
+const cartManager = require('../managers/cart.manager')
 
 async function socketManager(socket) {
     console.log(`Cliente conectado: ${socket.id}`)
@@ -13,6 +14,10 @@ async function socketManager(socket) {
     socket.on('chat-message', async (msg) => {
         await chatManager.createMessage(msg)
         socket.broadcast.emit('chat-message', msg) 
+    })
+
+    socket.on('addToCart', async ({ userId, productId }) => {
+        await cartManager.addProductCart(userId, productId)
     })
 
     socket.on('disconnect', () => {

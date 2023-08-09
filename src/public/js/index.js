@@ -40,7 +40,7 @@ function updateProductsView(products) {
                         </div>
                         <h5>USD $${product.price}</h5>
                         <p>${product.description}</p>
-                        <button onclick="addToCart(${product._id})" class="btn btn-dark btn-sm">Agregar al carrito</button>
+                        <button onclick="addToCart('${product.code}')" class="btn btn-dark btn-sm">Agregar al carrito</button>
                     </div>
                 </div>
             `
@@ -67,7 +67,7 @@ function addProductByIO(product){
                 </div>
                 <h5>USD $${product.price}</h5>
                 <p>${product.description}</p>
-                <button onclick="addToCart(${product._id})" class="btn btn-dark btn-sm">Agregar al carrito</button>
+                <button onclick="addToCart('${product.code}')" class="btn btn-dark btn-sm">Agregar al carrito</button>
             </div>
         </div>`
 
@@ -80,3 +80,8 @@ function deleteProductByIO(pid){
         productToDelete.remove();
     }
 }
+
+function addToCart(productId) {
+    socket.emit('addToCart', { userId: '64d23b85a40d4c2ef9d4b1a2', productId })
+}
+

@@ -15,7 +15,7 @@ class CarritoManager {
         return await cartModel.create(body)
     }
 
-    async addProductCart(id, product) {
+    async addProductCart(id, productCode) {
         try {
             const cart = await cartModel.findById(id)
     
@@ -23,25 +23,25 @@ class CarritoManager {
                 throw new Error('Cart not found')
             }
     
-            const productDetails = await productModel.findById(product._id)
+            const productDetails = await productModel.findOne({ code: productCode })
     
             if (!productDetails) {
                 throw new Error('Product not found')
             }
     
-            const existingProduct = cart.products.find(p => p._id == product._id)
+            const existingProduct = cart.products.find(p => p._id == productDetails._id)
     
             if (existingProduct) {
                 existingProduct.qty += 1
             } else {
                 const productToAdd = {
-                    _id: product._id,
+                    _id: productDetails._id,
                     title: productDetails.title,
                     qty: 1
                 }
                 cart.products.push(productToAdd)
             }
-
+    
             const updatedCart = await cart.save()
     
             return updatedCart
