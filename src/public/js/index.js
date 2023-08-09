@@ -21,7 +21,7 @@ socket.on('deleteProduct', (pid) => {
 })
 
 function updateProductsView(products) {
-    const productsContainer = document.querySelector('#products')
+    const productsContainer = document.querySelector('#realtimeproducts')
     if(products){
         productsContainer.innerHTML = ''
 
@@ -40,7 +40,7 @@ function updateProductsView(products) {
                         </div>
                         <h5>USD $${product.price}</h5>
                         <p>${product.description}</p>
-                        <button onclick="addToCart(${product.id})" class="btn btn-dark btn-sm">Agregar al carrito</button>
+                        <button onclick="addToCart(${product._id})" class="btn btn-dark btn-sm">Agregar al carrito</button>
                     </div>
                 </div>
             `
@@ -51,7 +51,7 @@ function updateProductsView(products) {
 }
 
 function addProductByIO(product){
-    const realTimeProducts = document.querySelector('#products')
+    const realTimeProducts = document.querySelector('#realtimeproducts')
     const div = document.createElement('div')
     div.classList.add('col-12', 'col-sm-6', 'col-md-4' ,'col-lg-3')
     div.dataset.productId = product._id;
@@ -67,7 +67,7 @@ function addProductByIO(product){
                 </div>
                 <h5>USD $${product.price}</h5>
                 <p>${product.description}</p>
-                <button onclick="addToCart(${product.id})" class="btn btn-dark btn-sm">Agregar al carrito</button>
+                <button onclick="addToCart(${product._id})" class="btn btn-dark btn-sm">Agregar al carrito</button>
             </div>
         </div>`
 

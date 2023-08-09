@@ -14,7 +14,7 @@
             </span>
         </h2>
 </div>
-<div id="products" class="row">
+<div id="realtimeproducts" class="row">
         {{#each products}}
         <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-product-id="{{ this._id }}">
             <div class="card mb-5 box-shadow">
@@ -28,7 +28,7 @@
                     </div>
                     <h5>USD ${{ this.price }}</h5>
                     <p>{{ this.description }}</p>
-                    <button onclick="addToCart({{ this.id }})" class="btn btn-dark btn-sm">Agregar al carrito</button>
+                    <button onclick="addToCart({{ this._id }})" class="btn btn-dark btn-sm">Agregar al carrito</button>
                 </div>
             </div>
         </div>

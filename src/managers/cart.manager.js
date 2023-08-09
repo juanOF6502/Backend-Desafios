@@ -4,15 +4,15 @@ const productModel = require('../models/product.model')
 class CarritoManager {
     
     async getAllCarts(){
-        return cartModel.find().lean()
+        return await cartModel.find().lean()
     }
 
     async getCartById(id){
-        return cartModel.findById(id).lean()
+        return await cartModel.findById(id).lean()
     }
 
     async createCart(body){
-        return cartModel.create(body)
+        return await cartModel.create(body)
     }
 
     async addProductCart(id, product) {

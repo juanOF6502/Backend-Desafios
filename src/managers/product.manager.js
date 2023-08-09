@@ -1,16 +1,16 @@
 const productModel = require('../models/product.model')
 
 class ProductManager {
-    getProducts() {
-        return productModel.find().lean()
+    async getProducts() {
+        return await productModel.find().lean()
     }
 
     async getProductById(id) {
-        return productModel.findById(id)
+        return await productModel.findById(id)
     }
 
     async createProduct(body) {
-        return productModel.create(body)
+        return await productModel.create(body)
     }
 
     async saveProduct(id, product) {

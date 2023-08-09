@@ -40,11 +40,8 @@ router.get('/categoria/:category', async (req, res) => {
 })
 
 router.get('/realtimeproducts', async(req, res) => {
-    const products = await productManagerMDB.getProducts()
-
     const renderData = {
         title: 'Real Time Products',
-        products,
         style: 'home'
     }
 
