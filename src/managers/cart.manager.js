@@ -15,38 +15,36 @@ class CarritoManager {
         return await cartModel.create(body)
     }
 
-    async addProductCart(id, productCode) {
+    async addProductToCart(cartId, productId) {
         try {
-            const cart = await cartModel.findById(id)
-    
+            const cart = await cartModel.findById(cartId)
             if (!cart) {
                 throw new Error('Cart not found')
             }
     
-            const productDetails = await productModel.findOne({ code: productCode })
-    
-            if (!productDetails) {
+            const product = await productModel.findById(productId)
+            if (!product) {
                 throw new Error('Product not found')
             }
     
-            const existingProduct = cart.products.find(p => p._id == productDetails._id)
+            const existingProductIndex = cart.products.findIndex(p => p._id.toString() == productId)
     
-            if (existingProduct) {
-                existingProduct.qty += 1
+            if (existingProductIndex !== -1) {
+                cart.products[existingProductIndex].qty += 1
             } else {
-                const productToAdd = {
-                    _id: productDetails._id,
-                    title: productDetails.title,
+                cart.products.push({
+                    _id: productId,
+                    title: product.title,
                     qty: 1
-                }
-                cart.products.push(productToAdd)
+                })
             }
     
             const updatedCart = await cart.save()
     
             return updatedCart
         } catch (error) {
-            console.log(`Ocurrio un error: ${error}`)
+            console.error(`An error occurred: ${error}`)
+            throw error
         }
     }
 }

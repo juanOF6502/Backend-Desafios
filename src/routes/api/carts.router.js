@@ -32,29 +32,14 @@ router.get('/:cid', async (req, res) => {
 });
 
 router.post('/:cid/product/:pid', async (req, res) => {
-    const { cid, pid } = req.params
-
-    const cleanedPid = pid.trim()
+    const { cid, pid } = req.params;
 
     try {
-        const productDetails = await productManagerMDB.getProductById(cleanedPid)
-
-        if (!productDetails) {
-            throw new Error('Not found')
-        }
-
-        const product = {
-            _id: productDetails._id,
-            title: productDetails.title,
-            qty: productDetails.qty
-        }
-
-        const updatedCart = await cartManagerMDB.addProductCart(cid, product)
-
-        res.send(updatedCart)
+        const updatedCart = await cartManagerMDB.addProductToCart(cid, pid);
+        res.send(updatedCart);
     } catch (error) {
-        console.error(error)
-        res.sendStatus(500)
+        console.error(error);
+        res.sendStatus(500);
     }
 })
 

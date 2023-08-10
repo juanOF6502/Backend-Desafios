@@ -25,22 +25,18 @@ router.get('/', async (req, res) => {
     res.send(productstFilter)
 })
 
+
 router.get('/:pid', async (req, res) => {
-    const products = await productManagerMDB.getProducts()
-
-    const pid = req.params.pid
-
-    console.log(`Buscando producto con ID ${pid}`)
-
-    for (const p of products){
-        if(p._id == pid) {
-            res.send(p)
-            return
-        }
+    const pid = req.params.pid;
+    try {
+        console.log(`Buscando producto con ID ${pid}`)
+        const product = await productManagerMDB.getProductById(pid);
+        res.send(product);
+    } catch (error) {
+        console.error(error);
+        res.sendStatus(404);
     }
-
-    res.sendStatus(404)
-})
+});
 
 router.post('/', async (req, res) => {
     const { body, io } = req

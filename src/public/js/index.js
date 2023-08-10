@@ -40,7 +40,7 @@ function updateProductsView(products) {
                         </div>
                         <h5>USD $${product.price}</h5>
                         <p>${product.description}</p>
-                        <button onclick="addToCart('${product.code}')" class="btn btn-dark btn-sm">Agregar al carrito</button>
+                        <button onclick="addToCart('${product._id}')" class="btn btn-dark btn-sm">Agregar al carrito</button>
                     </div>
                 </div>
             `
@@ -67,7 +67,7 @@ function addProductByIO(product){
                 </div>
                 <h5>USD $${product.price}</h5>
                 <p>${product.description}</p>
-                <button onclick="addToCart('${product.code}')" class="btn btn-dark btn-sm">Agregar al carrito</button>
+                <button onclick="addToCart('${product._id}')" class="btn btn-dark btn-sm">Agregar al carrito</button>
             </div>
         </div>`
 

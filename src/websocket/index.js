@@ -17,7 +17,7 @@ async function socketManager(socket) {
     })
 
     socket.on('addToCart', async ({ userId, productId }) => {
-        await cartManager.addProductCart(userId, productId)
+        await cartManager.addProductToCart(userId, productId)
     })
 
     socket.on('disconnect', () => {
