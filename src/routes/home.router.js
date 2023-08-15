@@ -27,14 +27,17 @@ router.get('/', async(req, res) => {
 
 router.get('/categoria/:category', async (req, res) => {
     const { category } = req.params
-    const products = await productManagerMDB.getProducts()
-    const filteredProducts = category
-        ? await productManagerMDB.getProductsByCategory(category)
-        : products
+    const { limit = 10, page = 1, sort, query, status } = req.query
+
+    const { docs: products, ...pageInfo } = await productManagerMDB.getAllPaged(limit, page, sort, query, category, status)
+
+    pageInfo.prevLink = pageInfo.hasPrevPage ? `http://localhost:8080/?page=${pageInfo.prevPage}&limit=${limit}` : ''
+    pageInfo.nextLink = pageInfo.hasNextPage ? `http://localhost:8080/?page=${pageInfo.nextPage}&limit=${limit}` : ''
 
     const renderData = {
         title: 'Home',
-        products: filteredProducts,
+        pageInfo,
+        products,
         style: 'home'
     }
 
