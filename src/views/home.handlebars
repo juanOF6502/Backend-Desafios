@@ -14,6 +14,25 @@
             </span>
         </h2>
 </div>
+
+<div class="container mb-3">
+    <div class="row justify-content-center">
+        <div class="col-2">
+            {{#if pageInfo.hasPrevPage}}
+                <a href={{pageInfo.prevLink}} class="btn btn-dark rounded">Anterior</a>
+            {{/if}}
+        </div>
+        <div class="col-2">
+            <p class="">Página {{pageInfo.page}}</p>
+        </div>
+        <div class="col-2">
+            {{#if pageInfo.hasNextPage}}
+                <a href={{pageInfo.nextLink}} class="btn btn-dark rounded">Siguiente</a>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
 <div id="products" class="row">
     {{#each products}}
     <div class="col-6 col-sm-6 col-md-4 col-lg-3" data-product-id="{{ this._id }}">

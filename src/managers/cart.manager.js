@@ -27,14 +27,13 @@ class CarritoManager {
                 throw new Error('Product not found')
             }
     
-            const existingProductIndex = cart.products.findIndex(p => p._id.toString() == productId)
+            const existingProductIndex = cart.products.findIndex(p => p._id === productId)
     
             if (existingProductIndex !== -1) {
                 cart.products[existingProductIndex].qty += 1
             } else {
                 cart.products.push({
-                    _id: productId,
-                    title: product.title,
+                    product: product._id,
                     qty: 1
                 })
             }
@@ -42,6 +41,59 @@ class CarritoManager {
             const updatedCart = await cart.save()
     
             return updatedCart
+        } catch (error) {
+            console.error(`An error occurred: ${error}`)
+            throw error
+        }
+    }
+
+    async deleteCartProduct(cartId, productId) {
+        try {
+            await cartModel.findByIdAndUpdate(
+                cartId,
+                {
+                    $pull: { products: { _id: productId } }
+                }
+            );
+        } catch (error) {
+            console.error(`An error occurred: ${error}`)
+            throw error
+        }
+    }
+
+    async deleteAllCartProducts(cartId) {
+        try {
+            await cartModel.findByIdAndUpdate(
+                cartId,
+                {
+                    $set: { products: [] }
+                }
+            )
+        } catch (error) {
+            console.error(`An error occurred: ${error}`)
+            throw error
+        }
+    }
+
+    async updatedCartProducts(cartId, newProducts){
+        await cartModel.findByIdAndUpdate(cartId, { products: newProducts }, { new: true }).lean()
+    }
+
+    async updateProductQuantity(cartId, productId, newQty) {
+        try {
+            await cartModel.findByIdAndUpdate(
+                cartId,
+                {
+                    $set: {
+                        'products.$[productToUpdate].qty': newQty
+                    }
+                },
+                {
+                    arrayFilters: [
+                        { 'productToUpdate._id': productId }
+                    ]
+                }
+            )
         } catch (error) {
             console.error(`An error occurred: ${error}`)
             throw error

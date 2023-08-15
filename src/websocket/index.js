@@ -3,7 +3,7 @@ const productManager = require('../managers/product.manager')
 const cartManager = require('../managers/cart.manager')
 
 async function socketManager(socket) {
-    console.log(`Cliente conectado: ${socket.id}`)
+    console.log(`Client connected: ${socket.id}`)
 
     const products = await productManager.getProducts()
     socket.emit('products', products)
@@ -21,7 +21,7 @@ async function socketManager(socket) {
     })
 
     socket.on('disconnect', () => {
-        console.log(`Cliente desconectado: ${socket.id}`)
+        console.log(`Client disconnected: ${socket.id}`)
     })
 }
 

@@ -44,8 +44,8 @@
             console.log(`Server listening at http://localhost:${process.env.PORT}`)
         })
         
-        console.log('Conectando a la base de datos')
+        console.log('Connected to database')
     } catch (error) {
-        console.log('Error al conectar a la base de datos:', error)
+        console.log('Error connecting to database:', error)
     }
 })()

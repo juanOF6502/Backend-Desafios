@@ -1,42 +1,42 @@
 const { Router } = require('express')
-
 const productManagerMDB = require('../../managers/product.manager')
 const router = Router()
 
-
-
 router.get('/', async (req, res) => {
-    const {search, limit} = req.query
+    try {
+        const { limit = 10, page = 1, sort, query, category, status } = req.query
 
-    const products = await productManagerMDB.getProducts()
-    let productstFilter = products
-    console.log('Buscando productos...')
+        const { docs: products, ...pageInfo } = await productManagerMDB.getAllPaged(limit, page, sort, query, category, status)
 
-    if(search){
-        console.log(`Buscando productos con "${search}"`)
-        productstFilter = products.filter(p => p.title.toLowerCase().includes(search) || p.description.toLowerCase().includes(search))
+        if (products) {
+            pageInfo.status = 'success'
+            pageInfo.payload = products
+            pageInfo.prevPage = pageInfo.hasPrevPage ? pageInfo.prevPage : null
+            pageInfo.nextPage = pageInfo.hasNextPage ? pageInfo.nextPage : null
+            pageInfo.prevLink = pageInfo.hasPrevPage ? `http://localhost:8080/api/products?page=${pageInfo.prevPage}&limit=${limit}` : null
+            pageInfo.nextLink = pageInfo.hasNextPage ? `http://localhost:8080/api/products?page=${pageInfo.nextPage}&limit=${limit}` : null
+        } else {
+            pageInfo.status = 'error'
+            pageInfo.message = 'Error obtaining products'
+        }
+
+        res.send({ pagination: pageInfo })
+    } catch (error) {
+        console.error(error)
+        res.sendStatus(500)
     }
-    if(limit){
-        console.log(`Busqueda limitada a ${limit} productos`)
-        const limitValue = parseInt(limit)
-        productstFilter = productstFilter.slice(0, limitValue)
-    } 
-
-    res.send(productstFilter)
 })
 
-
 router.get('/:pid', async (req, res) => {
-    const pid = req.params.pid;
+    const pid = req.params.pid
     try {
-        console.log(`Buscando producto con ID ${pid}`)
-        const product = await productManagerMDB.getProductById(pid);
-        res.send(product);
+        const product = await productManagerMDB.getProductById(pid)
+        res.send(product)
     } catch (error) {
-        console.error(error);
-        res.sendStatus(404);
+        console.error(error)
+        res.sendStatus(404)
     }
-});
+})
 
 router.post('/', async (req, res) => {
     const { body, io } = req

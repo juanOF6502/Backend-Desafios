@@ -2,7 +2,31 @@ const productModel = require('../models/product.model')
 
 class ProductManager {
     async getProducts() {
-        return await productModel.find().lean()
+        const products = await productModel.find().lean()
+        return products
+    }
+
+    async getAllPaged(limit = 10, page = 1, sort, query, category, status) {
+        let conditions = {};
+    
+        if (query) {
+            conditions = JSON.parse(query)
+        } else if (category) {
+            conditions.category = category
+        } else if (status) {
+            conditions.status = status
+        }
+    
+        const options = {
+            limit,
+            page,
+            sort: sort ? { price: sort === 'desc' ? -1 : 1 } : null,
+            lean: true
+        }
+    
+        const products = await productModel.paginate(conditions, options)
+    
+        return products
     }
 
     async getProductById(id) {
