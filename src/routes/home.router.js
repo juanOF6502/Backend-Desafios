@@ -79,6 +79,13 @@ router.get('/cart/:cid', async (req, res) => {
     }
 })
 
+router.get('/cart', (req,res) => {
+    res.render('emptycart', {
+        title: 'Carrito vacio',
+        style: 'home'
+    })
+})
+
 router.get('/chat', (req, res) => {
     res.render('chat', {
         title: 'Chat',
