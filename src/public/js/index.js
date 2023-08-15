@@ -75,9 +75,9 @@ function addProductByIO(product){
 }
 
 function deleteProductByIO(pid){
-    const productToDelete = document.querySelector(`[data-product-id="${pid}"]`);
+    const productToDelete = document.querySelector(`[data-product-id="${pid}"]`)
     if (productToDelete) {
-        productToDelete.remove();
+        productToDelete.remove()
     }
 }
 
