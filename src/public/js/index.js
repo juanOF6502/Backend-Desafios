@@ -82,6 +82,6 @@ function deleteProductByIO(pid){
 }
 
 function addToCart(productId) {
-    socket.emit('addToCart', { userId: '64d23b85a40d4c2ef9d4b1a2', productId })
+    socket.emit('addToCart', { userId: '64db809f300e1901969ad282', productId })
 }
 
