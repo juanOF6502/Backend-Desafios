@@ -41,6 +41,20 @@ const signup = async(req, email, password, done) => {
 
 const login = async (email, password, done) => {
     try {
+        if (email == 'adminCoder@coder.com' && password == 'adminCod3r123') {
+            const adminUser = {
+                _id: '64e4c8c1d91b6db14e5d1c91', 
+                firstname: 'admin',
+                lastname: 'coder',
+                email: 'adminCoder@coder.com',
+                password: 'adminCod3r123',
+                role: 'Admin',
+                gender: 'Hombre',
+                age: 30
+            }
+            return done(null, adminUser)
+        }
+
         const existingUser = await userManagerMDB.getByEmail(email)
         if(!existingUser){
             return done(null, false)
@@ -73,8 +87,22 @@ const init = () => {
     })
     
     passport.deserializeUser(async (id, done) => {
-        const user = await userManagerMDB.getById(id)
-        done(null, user)
+        if (id === '64e4c8c1d91b6db14e5d1c91') {
+            const adminUser = {
+                _id: '64e4c8c1d91b6db14e5d1c91', 
+                firstname: 'admin',
+                lastname: 'coder',
+                email: 'adminCoder@coder.com',
+                password: 'adminCod3r123',
+                role: 'Admin',
+                gender: 'Hombre',
+                age: 30
+            }
+            done(null, adminUser);
+        } else {
+            const user = await userManagerMDB.getById(id)
+            done(null, user)
+        }
     })
 }
 
