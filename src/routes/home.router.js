@@ -37,6 +37,10 @@ router.get('/', async(req, res) => {
 })
 
 router.get('/categoria/:category', async (req, res) => {
+    if(!req.user){
+        res.redirect('/login')
+        return
+    }
     const { category } = req.params
     const { limit = 10, page = 1, sort, query, status } = req.query
 
@@ -51,6 +55,7 @@ router.get('/categoria/:category', async (req, res) => {
         products,
         user: req.user ? {
             ...req.user,
+            isUser: req.user?.role == 'Usuario',
             isAdmin: req.user?.role == 'Admin'
         }: null,
         style: 'home'
@@ -88,6 +93,7 @@ router.get('/cart/:cid', async (req, res) => {
                 total: total,
                 user: req.user ? {
                     ...req.user,
+                    isUser: req.user?.role == 'Usuario',
                     isAdmin: req.user?.role == 'Admin'
                 }: null,
                 style: 'home'
@@ -102,10 +108,15 @@ router.get('/cart/:cid', async (req, res) => {
 })
 
 router.get('/cart', (req,res) => {
+    if(!req.user){
+        res.redirect('/login')
+        return
+    }
     res.render('emptycart', {
         title: 'Carrito vacio',
         user: req.user ? {
             ...req.user,
+            isUser: req.user?.role == 'Usuario',
             isAdmin: req.user?.role == 'Admin'
         }: null,
         style: 'home'
@@ -123,6 +134,7 @@ router.get('/profile', isAuth ,(req, res) => {
     res.render('profile', {
         user: req.user ? {
             ...req.user,
+            isUser: req.user?.role == 'Usuario',
             isAdmin: req.user?.role == 'Admin'
         }: null
     })
