@@ -7,6 +7,10 @@ const isAuth = require('../middlewares/auth.middleware')
 const router = Router()
 
 router.get('/', async(req, res) => {
+    if(!req.user){
+        res.redirect('/login')
+        return
+    }
     const { limit = 10, page = 1, sort, query, category, status } = req.query
 
     const { docs: products, ...pageInfo } = await productManagerMDB.getAllPaged(limit, page, sort, query, category, status)
@@ -20,6 +24,7 @@ router.get('/', async(req, res) => {
         products,
         user: req.user ?  {
             ...req.user,
+            isUser: req.user?.role == 'Usuario',
             isAdmin: req.user?.role == 'Admin',
         } : null,
         style: 'home'
