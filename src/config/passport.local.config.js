@@ -13,11 +13,11 @@ const signup = async(req, email, password, done) => {
     const existingUser = await userManagerMDB.getByEmail(email)
     if(existingUser){
         console.log('Usuario ya existente!')
-        return done(null, false, {message: 'Usuario ya existente!'})
+        return done(null, false)
     }
 
     if(_password !== _password2){
-        return done(null,false, {message: 'Las contraseñas deben coincidir!'})
+        return done(null,false)
     }
 
     try {
@@ -43,15 +43,15 @@ const login = async (email, password, done) => {
     try {
         const existingUser = await userManagerMDB.getByEmail(email)
         if(!existingUser){
-            return done(null, false, {message: 'Usuario no existente!'})
+            return done(null, false)
         }
 
         if(!password){
-            return done(null, false, {message: 'Contraseña requerida!'})
+            return done(null, false)
         }
 
         if(!isValidPassword(password, existingUser.password)){
-            return done(null, false, {message: 'Contraseña invalida!'})
+            return done(null, false)
         }
 
         done(null, existingUser)
