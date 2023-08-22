@@ -1,6 +1,8 @@
 const { Router } = require('express')
+
 const productManagerMDB = require('../managers/product.manager')
 const cartModel = require('../models/cart.model')
+const isAuth = require('../middlewares/auth.middleware')
 
 const router = Router()
 
@@ -112,7 +114,7 @@ router.get('/chat', (req, res) => {
     })
 })
 
-router.get('/profile', (req, res) => {
+router.get('/profile', isAuth ,(req, res) => {
     res.render('profile', {
         user: req.user ? {
             ...req.user,

@@ -51,17 +51,16 @@ const resetpassword = async (req, res) => {
 router.get('/signup', (req, res) => res.render('signup'))
 router.get('/login', (req, res) => res.render('login'))
 router.get('/resetpassword', (req, res) => res.render('resetpassword'))
-
 router.get('/logout', isAuth , logout)
 
 router.post('/signup', passport.authenticate('local-signup', {
-        successRedirect: '/profile',
-        failureRedirect: '/signup',
+    successRedirect: '/profile',
+    failureRedirect: '/signup',
 }))
 
 router.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/',
-        failureRedirect: '/login',
+    successRedirect: '/',
+    failureRedirect: '/login',
 }))
 
 router.post('/resetpassword', resetpassword)
