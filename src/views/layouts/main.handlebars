@@ -41,9 +41,30 @@
                             <i class="bi bi-bag"></i>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-animation fs-6" href="/realtimeproducts">Productos en tiempo real</a>
+                    {{#if user}}
+                    <li class="nav-item dropdown-center">
+                        <button class="btn dropdown-toggle text-light fs-5" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Bienvenido, {{user.firstname}}!
+                        </button>
+                        <ul class="dropdown-menu rounded">
+                            <li>
+                                <a class="dropdown-item" href="/profile">Perfil</a>
+                            </li>
+                            {{#if user.isAdmin}}
+                            <li>
+                                <a class="dropdown-item" href="/">Admin</a>
+                            </li>
+                            {{/if}}
+                            <li>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </li>
+                        </ul>
                     </li>
+                    {{else}}
+                    <li class="nav-item">
+                        <a class="nav-link text-light fs-5" href="/login">Iniciar Sesion</a>
+                    </li>
+                    {{/if}}
                 </ul>
             </div>
         </div>

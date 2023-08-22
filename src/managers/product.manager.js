@@ -7,7 +7,7 @@ class ProductManager {
     }
 
     async getAllPaged(limit = 10, page = 1, sort, query, category, status) {
-        let conditions = {};
+        let conditions = {}
     
         if (query) {
             conditions = JSON.parse(query)

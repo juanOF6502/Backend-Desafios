@@ -16,6 +16,10 @@ router.get('/', async(req, res) => {
         title: 'Home',
         pageInfo,
         products,
+        user: req.user ?  {
+            ...req.user,
+            isAdmin: req.user?.role == 'Admin',
+        } : null,
         style: 'home'
     }
     if (req.originalUrl !== '/chat') {
@@ -38,6 +42,10 @@ router.get('/categoria/:category', async (req, res) => {
         title: 'Home',
         pageInfo,
         products,
+        user: req.user ? {
+            ...req.user,
+            isAdmin: req.user?.role == 'Admin'
+        }: null,
         style: 'home'
     }
 
@@ -71,6 +79,10 @@ router.get('/cart/:cid', async (req, res) => {
                 title: 'Carrito',
                 products: cart.products,
                 total: total,
+                user: req.user ? {
+                    ...req.user,
+                    isAdmin: req.user?.role == 'Admin'
+                }: null,
                 style: 'home'
             });
         } else {
@@ -85,6 +97,10 @@ router.get('/cart/:cid', async (req, res) => {
 router.get('/cart', (req,res) => {
     res.render('emptycart', {
         title: 'Carrito vacio',
+        user: req.user ? {
+            ...req.user,
+            isAdmin: req.user?.role == 'Admin'
+        }: null,
         style: 'home'
     })
 })
@@ -96,5 +112,13 @@ router.get('/chat', (req, res) => {
     })
 })
 
+router.get('/profile', (req, res) => {
+    res.render('profile', {
+        user: req.user ? {
+            ...req.user,
+            isAdmin: req.user?.role == 'Admin'
+        }: null
+    })
+})
 
 module.exports = router

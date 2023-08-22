@@ -1,0 +1,55 @@
+<div class="container">
+    <h3 class="text-center">Tu perfil</h3>
+    <div class="col-md-6 container">
+        <div class="card mb-3 bg-dark text-light">
+        <i class="bi bi-person-square mx-auto display-4 mt-2"></i>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h6 class="mb-0">Nombre</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{user.firstname}} {{user.lastname}}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h6 class="mb-0">Email</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{user.email}}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h6 class="mb-0">Edad</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{user.age}}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h6 class="mb-0">Género</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{user.gender}}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h6 class="mb-0">Rol</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{user.role}}
+                </div>
+            </div>
+            <hr>
+        </div>
+        </div>
+    </div>
+</div>
