@@ -11,15 +11,14 @@ const githubAccessConfig = {
 }
 
 const githubUsers = async (profile, done) => {
-    const { login } = profile._json
-    const email = profile.emails[0].value
+    const { login, email } = profile._json
     const _user = await userManagerMDB.getByEmail(email)
 
     if (!_user) {
         const newUser = {
             firstname: login, 
             lastname: '',  
-            email: profile.emails[0].value,
+            email: email,
             password: '',
             gender: ''
         }

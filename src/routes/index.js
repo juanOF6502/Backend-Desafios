@@ -3,11 +3,14 @@ const ProductRouter = require('./api/products.router')
 const CarritoRouter = require('./api/carts.router')
 const HomeRoutes = require('./home.router')
 const LoginRoutes = require('./login.router')
+const jwtRoutes = require('../routes/api/auth.router')
+const jwtVerifyAuthToken  = require('../middlewares/jwt.auth.middleware')
 
 const api = Router()
 
-api.use('/products', ProductRouter)
-api.use('/carts', CarritoRouter)
+api.use('/products', jwtVerifyAuthToken, ProductRouter)
+api.use('/carts',jwtVerifyAuthToken, CarritoRouter)
+api.use('/jwtAuth', jwtRoutes)
 
 const home = Router()
 
