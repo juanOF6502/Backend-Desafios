@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const passport = require('passport')
+require('dotenv').config()
 
 const userManagerMDB = require('../managers/user.manager')
 const isAuth = require('../middlewares/auth.middleware')
@@ -45,6 +46,25 @@ const resetpassword = async (req, res) => {
 }
 
 
+
+// Controller de GITHUB
+
+const githubCallBack = (req, res) => {
+    const user = req.user
+    req.session.user = {
+        id: user.id,
+        name: user.firstname,
+        role: user?.role??'Usuario',
+        email: user.email
+    }
+
+    res.redirect('/')
+}
+
+// Github router
+
+router.get('/github', passport.authenticate(process.env.GITHUB_STRATEGY_NAME), (req, res) => {})
+router.get('/githubSession', passport.authenticate(process.env.GITHUB_STRATEGY_NAME), githubCallBack)
 
 // Login Router
 

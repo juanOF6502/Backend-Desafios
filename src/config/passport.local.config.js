@@ -1,4 +1,3 @@
-const passport = require('passport')
 const local = require('passport-local')
 
 const userManagerMDB = require('../managers/user.manager')
@@ -42,16 +41,7 @@ const signup = async(req, email, password, done) => {
 const login = async (email, password, done) => {
     try {
         if (email == 'adminCoder@coder.com' && password == 'adminCod3r123') {
-            const adminUser = {
-                _id: '64e4c8c1d91b6db14e5d1c91', 
-                firstname: 'admin',
-                lastname: 'coder',
-                email: 'adminCoder@coder.com',
-                password: 'adminCod3r123',
-                role: 'Admin',
-                gender: 'Hombre',
-                age: 30
-            }
+            const adminUser = { _id: '64e4c8c1d91b6db14e5d1c91'}
             return done(null, adminUser)
         }
 
@@ -76,34 +66,8 @@ const login = async (email, password, done) => {
     }
 }
 
-
-const init = () => {
-    passport.use('local-signup', new LocalStrategy({ usernameField: 'email', passReqToCallback: true}, signup))
-    
-    passport.use('local-login', new LocalStrategy({ usernameField: 'email' }, login))
-    
-    passport.serializeUser((user, done) => {
-        done(null, user._id)
-    })
-    
-    passport.deserializeUser(async (id, done) => {
-        if (id === '64e4c8c1d91b6db14e5d1c91') {
-            const adminUser = {
-                _id: '64e4c8c1d91b6db14e5d1c91', 
-                firstname: 'admin',
-                lastname: 'coder',
-                email: 'adminCoder@coder.com',
-                password: 'adminCod3r123',
-                role: 'Admin',
-                gender: 'Hombre',
-                age: 30
-            }
-            done(null, adminUser);
-        } else {
-            const user = await userManagerMDB.getById(id)
-            done(null, user)
-        }
-    })
+module.exports = {
+    LocalStrategy,
+    signup,
+    login
 }
-
-module.exports = init

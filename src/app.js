@@ -13,7 +13,7 @@
 
     const Routes = require('./routes/index')
     const socketManager = require('./websocket')
-    const initPassportLocal = require('./config/passport.local.config')
+    const initPassportLocal = require('./config/passport.init')
 
     try {
         await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@ecommerce.uh8azfr.mongodb.net/ecommerce?retryWrites=true&w=majority`)
