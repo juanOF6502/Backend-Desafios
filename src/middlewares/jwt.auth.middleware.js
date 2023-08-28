@@ -17,7 +17,7 @@ const jwtVerifyAuthToken = (req, res, next) => {
         next()
     } catch (error) {
         console.log(error)
-        res.status(400)({status: 'error', error: 'Not valid token'})
+        res.status(400).send({status: 'error', error: 'Not valid token'})
         res.end()
     }
 }
