@@ -46,7 +46,6 @@ const resetpassword = async (req, res) => {
 }
 
 
-
 // Controller de GITHUB
 
 const githubCallBack = (req, res) => {
@@ -84,5 +83,6 @@ router.post('/login', passport.authenticate('local-login', {
 }))
 
 router.post('/resetpassword', resetpassword)
+
 
 module.exports = router

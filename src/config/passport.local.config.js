@@ -1,5 +1,6 @@
 const local = require('passport-local')
 
+const cartManagerMDB = require('../managers/cart.manager')
 const userManagerMDB = require('../managers/user.manager')
 const { hashPassword, isValidPassword } = require('../utils/password.utils')
 const LocalStrategy = local.Strategy
@@ -20,11 +21,13 @@ const signup = async(req, email, password, done) => {
     }
 
     try {
+        const cart = await cartManagerMDB.createCart()
         const newUser = await userManagerMDB.create({
             ...user,
             email,
             password: hashPassword(password),
-            role: isAdmin ? 'Admin' : 'Usuario'
+            role: isAdmin ? 'Admin' : 'Usuario',
+            cart: cart._id
         })
 
         return done(null, {

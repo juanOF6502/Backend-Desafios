@@ -14,9 +14,9 @@ async function socketManager(socket) {
         socket.broadcast.emit('chat-message', msg) 
     })
 
-    socket.on('addToCart', async ({ userId, productId }) => {
-        await cartManagerMDB.addProductToCart(userId, productId)
+    socket.on('addToCart', async ({ userCart, productId }) => {
+        await cartManagerMDB.addProductToCart(userCart, productId)
     })
 }
 
-module.exports = socketManager;
+module.exports = socketManager
