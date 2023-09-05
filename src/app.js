@@ -1,4 +1,5 @@
 (async () => {
+    require('dotenv').config()
     const path = require('path')
     const http = require('http')
 
@@ -9,7 +10,6 @@
     const session = require('express-session')
     const MongoStore = require('connect-mongo')
     const passport = require('passport')
-    require('dotenv').config()
 
     const Routes = require('./routes/index')
     const socketManager = require('./websocket')
