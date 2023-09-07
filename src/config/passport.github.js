@@ -13,7 +13,6 @@ const githubAccessConfig = {
 
 const githubUsers = async (profile, done) => {
     const { login, email } = profile._json
-    console.log(profile._json)
     const _user = await userManagerMDB.getByEmail(email)
 
     if (!_user) {
