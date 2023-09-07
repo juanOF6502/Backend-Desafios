@@ -1,5 +1,6 @@
 const githubStrategy = require('passport-github2')
 const userManagerMDB = require('../managers/user.manager')
+const cartManagerMDB = require('../managers/cart.manager')
 require('dotenv').config()
 
 const githubAccessConfig = {
@@ -12,6 +13,7 @@ const githubAccessConfig = {
 
 const githubUsers = async (profile, done) => {
     const { login, email } = profile._json
+    console.log(profile._json)
     const _user = await userManagerMDB.getByEmail(email)
 
     if (!_user) {
@@ -20,10 +22,16 @@ const githubUsers = async (profile, done) => {
             lastname: '',  
             email: email,
             password: '',
-            gender: ''
+            gender: '',
+            cart: null
         }
 
         const result = await userManagerMDB.create(newUser)
+
+        const newCart = await cartManagerMDB.createCart()
+        result.cart = newCart._id
+        await result.save()
+
         return done(null, result)
     }
 

@@ -14,14 +14,10 @@ router.get('/',isAuth, async(req, res) => {
     pageInfo.prevLink = pageInfo.hasPrevPage ? `http://localhost:8080/?page=${pageInfo.prevPage}&limit=${limit}` : ''
     pageInfo.nextLink = pageInfo.hasNextPage ? `http://localhost:8080/?page=${pageInfo.nextPage}&limit=${limit}` : ''
 
-    const totalCart = await userModel.findById(req.user._id).populate({path:'cart', populate:{path:'products.product'}}).lean()
-    const totalProducts = Object.keys(totalCart.cart.products).length
-    
     const renderData = {
         title: 'Home',
         pageInfo,
         products,
-        totalProducts,
         userCart: req.user.cart,
         user: req.user ?  {
             ...req.user,
@@ -46,14 +42,11 @@ router.get('/categoria/:category',isAuth, async (req, res) => {
     pageInfo.prevLink = pageInfo.hasPrevPage ? `http://localhost:8080/?page=${pageInfo.prevPage}&limit=${limit}` : ''
     pageInfo.nextLink = pageInfo.hasNextPage ? `http://localhost:8080/?page=${pageInfo.nextPage}&limit=${limit}` : ''
 
-    const totalCart = await userModel.findById(req.user._id).populate({path:'cart', populate:{path:'products.product'}}).lean()
-    const totalProducts = Object.keys(totalCart.cart.products).length
 
     const renderData = {
         title: 'Home',
         pageInfo,
         products,
-        totalProducts,
         userCart: req.user.cart,
         user: req.user ? {
             ...req.user,
