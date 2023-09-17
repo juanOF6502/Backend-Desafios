@@ -1,6 +1,8 @@
 const passport = require('passport')
 const userManagerMDB = require('../managers/user.manager')
+
 require('dotenv').config()
+const config = require('../config/config')
 
 const { LocalStrategy, signup, login } = require('./passport.local.config')
 const { githubStrategy, githubAccessConfig, profileGitController } = require('./passport.github')
@@ -10,7 +12,7 @@ const init = () => {
     
     passport.use('local-login', new LocalStrategy({ usernameField: 'email' }, login))
     
-    passport.use(process.env.GITHUB_STRATEGY_NAME, new githubStrategy(githubAccessConfig, profileGitController))
+    passport.use(config.GITHUB_STRATEGY_NAME, new githubStrategy(githubAccessConfig, profileGitController))
 
     passport.serializeUser((user, done) => { done(null, user._id) })
     

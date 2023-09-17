@@ -11,12 +11,13 @@
     const MongoStore = require('connect-mongo')
     const passport = require('passport')
 
+    const config = require('./config/config')
     const Routes = require('./routes/index')
     const socketManager = require('./websocket')
     const initPassport = require('./config/passport.init')
 
     try {
-        await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@ecommerce.uh8azfr.mongodb.net/ecommerce?retryWrites=true&w=majority`)
+        await mongoose.connect(config.MONGO_URL)
         
         const app = express()
         const server = http.createServer(app)
@@ -39,7 +40,7 @@
             resave: true,
             saveUninitialized: true,
             store: MongoStore.create({
-                mongoUrl: `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@ecommerce.uh8azfr.mongodb.net/ecommerce?retryWrites=true&w=majority`,
+                mongoUrl: config.MONGO_URL,
                 ttl: 3600
             })
         }))
@@ -62,7 +63,7 @@
 
         // Iniciar el servidor
         server.listen(process.env.PORT, () => {
-            console.log(`Server listening at http://localhost:${process.env.PORT}`)
+            console.log(`Server listening at http://localhost:${config.PORT}`)
         })
         
         console.log('Connected to database')

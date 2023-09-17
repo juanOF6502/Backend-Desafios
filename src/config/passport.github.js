@@ -1,12 +1,15 @@
 const githubStrategy = require('passport-github2')
 const userManagerMDB = require('../managers/user.manager')
 const cartManagerMDB = require('../managers/cart.manager')
+
 require('dotenv').config()
+const config = require('../config/config')
+
 
 const githubAccessConfig = {
-    clientID: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: `http://localhost:${process.env.PORT}/githubSession`,
+    clientID: config.GITHUB_CLIENT_ID,
+    clientSecret: config.GITHUB_CLIENT_SECRET,
+    callbackURL: `http://localhost:${config.PORT}/githubSession`,
     proxy: true,
     scope: ['user:email']
 }
