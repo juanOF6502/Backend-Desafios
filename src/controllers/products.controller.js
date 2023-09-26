@@ -1,10 +1,10 @@
-const productManagerMDB = require('../managers/product.manager')
+const productRepository = require('../repositories/product.repository')
 
 const getAll = async (req, res) => {
     try {
         const { limit = 10, page = 1, sort, query, category, status } = req.query
 
-        const { docs: products, ...pageInfo } = await productManagerMDB.getAllPaged(limit, page, sort, query, category, status)
+        const { docs: products, ...pageInfo } = await productRepository.getAllPaged(limit, page, sort, query, category, status)
 
         if (products) {
             pageInfo.status = 'success'
@@ -28,7 +28,7 @@ const getAll = async (req, res) => {
 const getById = async (req, res) => {
     const pid = req.params.pid
     try {
-        const product = await productManagerMDB.getProductById(pid)
+        const product = await productRepository.getById(pid)
         res.send(product)
     } catch (error) {
         console.error(error)
@@ -39,7 +39,7 @@ const getById = async (req, res) => {
 const createProduct = async (req, res) => {
     const { body, io } = req
     try {
-        const product = await productManagerMDB.createProduct(body)
+        const product = await productRepository.create(body)
         io.emit('newProduct', product)
         res.status(201).send(product)
     } catch (error) {
@@ -51,12 +51,12 @@ const updateProduct = async (req, res) => {
     const { pid } = req.params
     const { body } = req
     
-    if(!await productManagerMDB.getProductById(pid)){
+    if(!await productRepository.getById(pid)){
         res.sendStatus(404)
         return
     }
 
-    await productManagerMDB.saveProduct(pid, body)
+    await productRepository.update(pid, body)
     res.sendStatus(200)
 }
 
@@ -64,12 +64,12 @@ const deleteProduct = async (req, res) => {
     const { pid } = req.params
     const { io } = req
 
-    if(!await productManagerMDB.getProductById(pid)){
+    if(!await productRepository.getById(pid)){
         res.sendStatus(404)
         return
     }
 
-    await productManagerMDB.deleteProduct(pid)
+    await productRepository.delete(pid)
     io.emit('deleteProduct', pid)
     res.sendStatus(200)
 }

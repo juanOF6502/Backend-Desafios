@@ -7,12 +7,10 @@ const sessionRoutes = require('../routes/api/session.router')
 const HomeRoutes = require('./home.router')
 const LoginRoutes = require('./login.router')
 
-const jwtVerifyAuthToken  = require('../middlewares/jwt.auth.middleware')
-
 const api = Router()
 
-api.use('/products', jwtVerifyAuthToken, ProductRouter)
-api.use('/carts',jwtVerifyAuthToken, CarritoRouter)
+api.use('/products', ProductRouter)
+api.use('/carts', CarritoRouter)
 api.use('/sessions', sessionRoutes)
 api.use('/jwtAuth', jwtRoutes)
 

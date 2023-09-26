@@ -1,21 +1,21 @@
-const chatManagerMDB = require('../managers/chat.manager')
-const productManagerMDB = require('../managers/product.manager')
-const cartManagerMDB = require('../managers/cart.manager')
+const chatController = require('../repositories/chat.repository')
+const productController = require('../repositories/product.repository')
+const cartController = require('../repositories/cart.repository')
 
 async function socketManager(socket) {
-    const products = await productManagerMDB.getProducts()
+    const products = await productController.getAll()
     socket.emit('products', products)
     
-    const messages = await chatManagerMDB.getAllMessages()
+    const messages = await chatController.getAll()
     socket.emit('chat-messages', messages)
 
     socket.on('chat-message', async (msg) => {
-        await chatManagerMDB.createMessage(msg)
+        await chatController.create(msg)
         socket.broadcast.emit('chat-message', msg) 
     })
 
     socket.on('addToCart', async ({ userCart, productId }) => {
-        await cartManagerMDB.addProductToCart(userCart, productId)
+        await cartController.addProductToCart(userCart, productId)
     })
 }
 

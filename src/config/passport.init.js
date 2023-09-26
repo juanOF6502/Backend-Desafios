@@ -1,5 +1,5 @@
 const passport = require('passport')
-const userManagerMDB = require('../managers/user.manager')
+const userRepository = require('../repositories/user.repository')
 
 require('dotenv').config()
 const config = require('../config/config')
@@ -23,10 +23,11 @@ const init = () => {
                 lastname: 'coder',
                 email: 'adminCoder@coder.com',
                 role: 'Admin',
+                cart: []
             }
             done(null, adminUser)
         } else {
-            const user = await userManagerMDB.getById(id)
+            const user = await userRepository.getById(id)
             done(null, user)
         }
     })

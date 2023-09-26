@@ -4,11 +4,13 @@ const {
     getById,
     createCart,
     addProductToCart,
+    purchaseCart,
     upadteCart,
     updateProductQuantity,
     deleteProduct,
     deleteAllProducts
 } = require('../../controllers/carts.controller')
+const { checkUserRole } = require('../../middlewares/authorize.middleware')
 
 const router = Router()
 
@@ -18,7 +20,9 @@ router.get('/:cid', getById)
 
 router.post('/', createCart)
 
-router.post('/:cid/product/:pid', addProductToCart)
+router.post('/:cid/product/:pid',checkUserRole(['Usuario']), addProductToCart)
+
+router.get('/:cid/purchase', purchaseCart)
 
 router.put('/:cid', upadteCart)
 

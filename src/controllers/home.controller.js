@@ -1,12 +1,10 @@
-const productManagerMDB = require('../managers/product.manager')
-const userModel = require('../models/user.model')
-
-
+const productRepository = require('../repositories/product.repository')
+const userRepository = require('../repositories/user.repository')
 
 const homeRender = async(req, res) => {
     const { limit = 10, page = 1, sort, query, category, status } = req.query
 
-    const { docs: products, ...pageInfo } = await productManagerMDB.getAllPaged(limit, page, sort, query, category, status)
+    const { docs: products, ...pageInfo } = await productRepository.getAllPaged(limit, page, sort, query, category, status)
 
     pageInfo.prevLink = pageInfo.hasPrevPage ? `http://localhost:8080/?page=${pageInfo.prevPage}&limit=${limit}` : ''
     pageInfo.nextLink = pageInfo.hasNextPage ? `http://localhost:8080/?page=${pageInfo.nextPage}&limit=${limit}` : ''
@@ -34,7 +32,7 @@ const productCategoriesRender = async (req, res) => {
     const { category } = req.params
     const { limit = 10, page = 1, sort, query, status } = req.query
 
-    const { docs: products, ...pageInfo } = await productManagerMDB.getAllPaged(limit, page, sort, query, category, status)
+    const { docs: products, ...pageInfo } = await productRepository.getAllPaged(limit, page, sort, query, category, status)
 
     pageInfo.prevLink = pageInfo.hasPrevPage ? `http://localhost:8080/?page=${pageInfo.prevPage}&limit=${limit}` : ''
     pageInfo.nextLink = pageInfo.hasNextPage ? `http://localhost:8080/?page=${pageInfo.nextPage}&limit=${limit}` : ''
@@ -74,23 +72,27 @@ const realTimeProductsRender = async(req, res) => {
 }
 
 const cartRender = async (req,res) => {
-    const user = await userModel.findById(req.user._id).populate({path:'cart',populate: {path: 'products.product'}}).lean()
+    const user = await userRepository.populateUser(req.user._id)
 
-    const cart = user.cart
+    if (user) {
+        const cart = user.cart ?? { products: [] }
 
-    const total = cart.products.reduce((acc, item) => acc + item.product.price * item.qty, 0)
+        const total = cart.products.reduce((acc, item) => acc + item.product.price * item.qty, 0)
 
-    res.render('carrito', {
-        title: 'Carrito',
-        products: cart.products,
-        total: total,
-        user: req.user ? {
-            ...req.user,
-            isUser: req.user?.role == 'Usuario',
-            isAdmin: req.user?.role == 'Admin'
-        }: null,
-        style: 'home'
-    })
+        res.render('carrito', {
+            title: 'Carrito',
+            products: cart.products,
+            total: total,
+            user: req.user ? {
+                ...req.user,
+                isUser: req.user?.role == 'Usuario',
+                isAdmin: req.user?.role == 'Admin'
+            } : null,
+            style: 'home'
+        });
+    } else {
+        res.status(500).send('Autorizacion no permitida')
+    }
 }
 
 const chatRender = (req, res) => {

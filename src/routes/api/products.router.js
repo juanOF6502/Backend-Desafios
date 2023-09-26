@@ -1,4 +1,5 @@
 const { Router } = require('express')
+
 const { 
     getAll, 
     getById, 
@@ -6,6 +7,8 @@ const {
     updateProduct, 
     deleteProduct
 } = require('../../controllers/products.controller')
+const { currentUser } = require('../../controllers/session.controller')
+const { checkUserRole } = require('../../middlewares/authorize.middleware')
 
 const router = Router()
 
@@ -13,10 +16,10 @@ router.get('/', getAll)
 
 router.get('/:pid', getById)
 
-router.post('/', createProduct)
+router.post('/', checkUserRole(['Admin']), createProduct)
 
-router.put('/:pid', updateProduct)
+router.put('/:pid', checkUserRole(['Admin']), updateProduct)
 
-router.delete('/:pid', deleteProduct)
+router.delete('/:pid', checkUserRole(['Admin']), deleteProduct)
 
 module.exports = router

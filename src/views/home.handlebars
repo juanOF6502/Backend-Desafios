@@ -47,7 +47,9 @@
                 </div>
                 <h5>USD ${{ this.price }}</h5>
                 <p>{{ this.description }}</p>
-                <button onclick="addToCart('{{../userCart}}', '{{ this._id }}')" class="btn btn-dark btn-sm">Agregar al carrito</button>
+                {{#if ../user.isUser}}
+                    <button onclick="addToCart('{{../userCart}}', '{{ this._id }}')" class="btn btn-dark btn-sm">Agregar al carrito</button>
+                {{/if}}
             </div>
         </div>
     </div>

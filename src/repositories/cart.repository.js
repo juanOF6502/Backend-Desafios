@@ -1,36 +1,28 @@
+const Repository = require('./base.repository')
 const cartModel = require('../models/cart.model')
-const productModel = require('../models/product.model')
+const productRepository = require('../repositories/product.repository')
 
-class CarritoManager {
-    
-    async getAllCarts(){
-        return await cartModel.find().lean()
-    }
-
-    async getCartById(id){
-        return await cartModel.findById(id).lean()
-    }
-
-    async createCart(body){
-        return await cartModel.create(body)
+class CartRepository extends Repository {
+    constructor(){
+        super(cartModel)
     }
 
     async addProductToCart(cartId, productId) {
         try {
-            const cart = await cartModel.findById(cartId)
+
+            const cart = await cartModel.findById(cartId).populate({ path: 'products',populate: {path: 'products.product'} })
             if (!cart) {
                 throw new Error('Cart not found')
             }
     
-            const product = await productModel.findById(productId)
+            const product = await productRepository.getById(productId)
             if (!product) {
                 throw new Error('Product not found')
             }
     
-            const existingProductIndex = cart.products.findIndex(p => p._id === productId)
-    
-            if (existingProductIndex !== -1) {
-                cart.products[existingProductIndex].qty += 1
+            const existingProduct = cart.products.find(p => p.product.toString() === productId.toString())
+            if (existingProduct) {
+                existingProduct.qty += 1
             } else {
                 cart.products.push({
                     product: product._id,
@@ -101,4 +93,4 @@ class CarritoManager {
     }
 }
 
-module.exports = new CarritoManager()
+module.exports = new CartRepository()

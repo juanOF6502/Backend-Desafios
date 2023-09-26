@@ -1,9 +1,9 @@
+const Repository = require('./base.repository')
 const productModel = require('../models/product.model')
 
-class ProductManager {
-    async getProducts() {
-        const products = await productModel.find().lean()
-        return products
+class ProductRepository extends Repository {
+    constructor(){
+        super(productModel)
     }
 
     async getAllPaged(limit = 10, page = 1, sort, query, category, status) {
@@ -29,23 +29,9 @@ class ProductManager {
         return products
     }
 
-    async getProductById(id) {
-        return await productModel.findById(id)
-    }
-
-    async createProduct(body) {
-        return await productModel.create(body)
-    }
-
-    async saveProduct(id, product) {
-        const result = await productModel.updateOne({ _id: id }, product)
-        return result
-    }
-
-    async deleteProduct(id) {
-        const result = await productModel.deleteOne({ _id: id })
-        return result
+    async getByInstance(id){
+        return await this.model.findById({ _id: id })
     }
 }
 
-module.exports = new ProductManager()
+module.exports = new ProductRepository()

@@ -1,4 +1,4 @@
-const userManagerMDB = require('../managers/user.manager')
+const userRepository = require('../repositories/user.repository')
 const  generateToken  = require('../utils/generate.token')
 const { isValidPassword } = require('../utils/password.utils')
 
@@ -6,7 +6,7 @@ const authLogin = async (req, res) => {
     const { email, password } = req.body
 
     try {
-        const user = await userManagerMDB.getByEmail(email)
+        const user = await userRepository.getByEmail(email)
 
         if(!user || !isValidPassword(password, user?.password)){
             return res.send({status: 'Fail', error: 'Invalid user or password'})

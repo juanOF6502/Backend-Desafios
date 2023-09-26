@@ -1,5 +1,5 @@
 require('dotenv').config()
-const userManagerMDB = require('../managers/user.manager')
+const userRepository = require('../repositories/user.repository')
 const { hashPassword } = require('../utils/password.utils')
 
 const logout = async (req, res) => {
@@ -16,7 +16,7 @@ const logout = async (req, res) => {
 const resetpassword = async (req, res) => {
     const { email, password1, password2 } = req.body
 
-    const user = await userManagerMDB.getByEmail(email)
+    const user = await userRepository.getByEmail(email)
 
     if(!user) {
         return res.render('resetpassword', { error: 'Usuario no existe!' })
@@ -27,7 +27,7 @@ const resetpassword = async (req, res) => {
     }
 
     try {
-        await userManagerMDB.saveUser(user._id, {
+        await userRepository.update(user._id, {
         ...user,
         password: hashPassword(password1)
         })
