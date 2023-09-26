@@ -1,5 +1,6 @@
 const cartRepository = require('../repositories/cart.repository')
 const productRepository = require('../repositories/product.repository')
+const ticketRepository = require('../repositories/ticket.repository')
 
 let lastOrderNumber = 0
 
@@ -67,6 +68,7 @@ const purchaseCart = async (req,res) => {
 
             products.push({
                 product: id,
+                title: item.title,
                 qty: toBuy,
                 price: item.price
             })
@@ -74,16 +76,18 @@ const purchaseCart = async (req,res) => {
             item.stock = item.stock - toBuy
 
             await item.save()
+
         }
 
         const po = {
             purchaser: req.user.email,
             code: generateNextOrderNumber(),
             amount: products.reduce((total, { price, qty }) => (price * qty ) + total,0),
-            products: products.map(({ product, qty }) => ({ product, qty })),
+            products: products.map(({ product, title, price, qty }) => ({ product, title, price, qty })),
             purchase_datetime: new Date().toLocaleString()
         }
 
+        await ticketRepository.create(po)
         res.send({purchaseOrder: po})
     } catch (error) {
         console.error(error)
