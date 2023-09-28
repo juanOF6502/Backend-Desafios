@@ -5,7 +5,7 @@ const checkUserRole = (roles) => {
         if (userRole && roles.includes(userRole)) {
             next()
         } else {
-            res.redirect('/')
+            res.status(401).send("Unauthorized")
         }
     }
 }
