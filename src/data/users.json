@@ -8,9 +8,7 @@
   "gender": "Hombre",
   "age": 35,
   "cart": {
-    "_id": {
-      "$oid": "64f1225a049528a342ece59f"
-    },
+    "_id": "64f1225a049528a342ece59f",
     "products": [
       {
         "product": {

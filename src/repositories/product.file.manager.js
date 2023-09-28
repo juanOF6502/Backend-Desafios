@@ -89,10 +89,29 @@ class ProductManager {
         await this.#writeFile()
     }
 
-    async getAllPaged() {
+    async getAllPaged(limit = 10, page = 1, sort, query, category, status) {
         await this.#readFile()
+    
+        
+        const filteredProducts = this.#products.filter(product => product.category.includes(category))
+    
+        const startIndex = (page - 1) * limit
+        const endIndex = page * limit
+        const slicedProducts = filteredProducts.slice(startIndex, endIndex)
 
-        return { docs: this.#products, pageIngfo: {}}
+        return {
+            docs: slicedProducts,
+            pageInfo: {
+                totalDocs: filteredProducts.length,
+                totalPages: Math.ceil(filteredProducts.length / limit),
+                page,
+                limit,
+                hasNextPage: endIndex < filteredProducts.length,
+                hasPrevPage: page > 1,
+                nextPage: page + 1,
+                prevPage: page - 1,
+            }
+        }
     }
 }
 

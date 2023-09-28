@@ -1,7 +1,5 @@
 [{
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac86"
-  },
+  "_id": "64cc284d03b0eb6f955fac86",
   "title": "The Legend of Zelda: Breath of the Wild",
   "description": "Videojuego de acción y aventura para Nintendo Switch",
   "price": 59.99,
@@ -15,9 +13,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac87"
-  },
+  "_id": "64cc284d03b0eb6f955fac87",
   "title": "Super Mario Odyssey",
   "description": "Videojuego de plataformas para Nintendo Switch",
   "price": 49.99,
@@ -32,9 +28,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac88"
-  },
+  "_id": "64cc284d03b0eb6f955fac88",
   "title": "Grand Theft Auto V",
   "description": "Videojuego de acción y aventura para PlayStation 4 y Xbox One",
   "price": 39.99,
@@ -49,9 +43,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac89"
-  },
+  "_id": "64cc284d03b0eb6f955fac89",
   "title": "The Last of Us Part II",
   "description": "Videojuego de acción y aventura para PlayStation 4",
   "price": 59.99,
@@ -66,9 +58,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac8a"
-  },
+  "_id": "64cc284d03b0eb6f955fac8a",
   "title": "Minecraft",
   "description": "Videojuego de sandbox disponible en varias plataformas",
   "price": 29.99,
@@ -83,9 +73,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac8b"
-  },
+  "_id": "64cc284d03b0eb6f955fac8b",
   "title": "FIFA 22",
   "description": "Videojuego de simulación deportiva para PlayStation 5 y Xbox Series X/S",
   "price": 69.99,
@@ -100,9 +88,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac8c"
-  },
+  "_id": "64cc284d03b0eb6f955fac8c",
   "title": "Call of Duty: Warzone",
   "description": "Videojuego de battle royale disponible en varias plataformas",
   "price": 59.99,
@@ -116,9 +102,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac8d"
-  },
+  "_id": "64cc284d03b0eb6f955fac8d",
   "title": "Assassin's Creed Valhalla",
   "description": "Videojuego de rol y acción para PlayStation 5 y Xbox Series X/S",
   "price": 49.99,
@@ -133,9 +117,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac8e"
-  },
+  "_id": "64cc284d03b0eb6f955fac8e",
   "title": "CYBERPUNK 2077",
   "description": "Videojuego de acción para PlayStation 5 y Xbox Series X/S",
   "price": 59.99,
@@ -150,9 +132,7 @@
   "stock": 50
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac8f"
-  },
+  "_id": "64cc284d03b0eb6f955fac8f",
   "title": "Red Dead Redemption 2",
   "description": "Action-adventure game for PlayStation 4 and Xbox One",
   "price": 49.99,
@@ -167,9 +147,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac90"
-  },
+  "_id": "64cc284d03b0eb6f955fac90",
   "title": "Overwatch",
   "description": "Multiplayer first-person shooter for PC, PlayStation 4, and Xbox One",
   "price": 39.99,
@@ -183,9 +161,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac91"
-  },
+  "_id": "64cc284d03b0eb6f955fac91",
   "title": "Super Smash Bros. Ultimate",
   "description": "Fighting game for Nintendo Switch",
   "price": 59.99,
@@ -200,9 +176,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac92"
-  },
+  "_id": "64cc284d03b0eb6f955fac92",
   "title": "Horizon Zero Dawn",
   "description": "Action role-playing game for PlayStation 4 and PC",
   "price": 39.99,
@@ -217,9 +191,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac93"
-  },
+  "_id": "64cc284d03b0eb6f955fac93",
   "title": "Animal Crossing: New Horizons",
   "description": "Life simulation game for Nintendo Switch",
   "price": 49.99,
@@ -232,9 +204,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64cc284d03b0eb6f955fac94"
-  },
+  "_id": "64cc284d03b0eb6f955fac94",
   "title": "God of War",
   "description": "Action-adventure game for PlayStation 4",
   "price": 39.99,
@@ -248,9 +218,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "64d0078f5657a54bb18fdbc9"
-  },
+  "_id": "64d0078f5657a54bb18fdbc9",
   "title": "Edge of Eternity",
   "description": "Videojuego de acción para PlayStation 5 y Xbox Series X/S",
   "price": 49.99,
