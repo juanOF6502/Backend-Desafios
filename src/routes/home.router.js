@@ -5,6 +5,7 @@ const {
     productCategoriesRender,
     realTimeProductsRender,
     cartRender,
+    purchaseRender,
     chatRender,
     profileRender
 } = require('../controllers/home.controller')
@@ -20,6 +21,8 @@ router.get('/categoria/:category', isAuth, productCategoriesRender)
 router.get('/realtimeproducts', realTimeProductsRender)
 
 router.get('/cart', isAuth , cartRender)
+
+router.get('/cart/purchase', isAuth, purchaseRender)
 
 router.get('/chat', checkUserRole(['Usuario']), chatRender)
 

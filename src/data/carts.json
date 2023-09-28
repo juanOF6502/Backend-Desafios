@@ -1,34 +1,78 @@
-[{
-  "_id": {
-    "$oid": "64f1225a049528a342ece59f"
-  },
-  "products": [
-    {
-      "product": {
-        "$oid": "64cc284d03b0eb6f955fac91"
+[
+  {
+    "_id": "64f1225a049528a342ece59f",
+    "products": [
+      {
+        "product": {
+          "_id": "64cc284d03b0eb6f955fac91",
+          "title": "Super Smash Bros. Ultimate",
+          "description": "Fighting game for Nintendo Switch",
+          "price": 59.99,
+          "thumbnail": "smashbros.jpg",
+          "code": "S001",
+          "stock": 50,
+          "status": true,
+          "category": [
+            "lucha",
+            "multijugador",
+            "crossover"
+          ]
+        },
+        "qty": 1
       },
-      "qty": 1,
-      "_id": {
-        "$oid": "64f5e07e38b6c04344e7f016"
-      }
-    },
-    {
-      "product": {
-        "$oid": "64cc284d03b0eb6f955fac86"
+      {
+        "product": {
+          "_id": "64cc284d03b0eb6f955fac86",
+          "title": "The Legend of Zelda: Breath of the Wild",
+          "description": "Videojuego de acción y aventura para Nintendo Switch",
+          "price": 59.99,
+          "thumbnail": "zelda.jpg",
+          "code": "Z001",
+          "stock": 50,
+          "status": true,
+          "category": [
+            "aventura",
+            "fantasia"
+          ]
+        },
+        "qty": 2
       },
-      "qty": 2,
-      "_id": {
-        "$oid": "64f5e2f88180bdded476820c"
-      }
-    },
-    {
-      "product": {
-        "$oid": "64cc284d03b0eb6f955fac8e"
+      {
+        "product": {
+          "_id": "64cc284d03b0eb6f955fac8e",
+          "title": "CYBERPUNK 2077",
+          "description": "Videojuego de acción para PlayStation 5 y Xbox Series X/S",
+          "price": 59.99,
+          "thumbnail": "cyber.jpg",
+          "status": true,
+          "code": "CP001",
+          "category": [
+            "accion",
+            "mundo abierto",
+            "ciencia ficcion"
+          ],
+          "stock": 50
+        },
+        "qty": 1
       },
-      "qty": 1,
-      "_id": {
-        "$oid": "64f5f2812a32c85e401c4282"
+      {
+        "product": {
+          "_id": "64cc284d03b0eb6f955fac8d",
+          "title": "Assassin's Creed Valhalla",
+          "description": "Videojuego de rol y acción para PlayStation 5 y Xbox Series X/S",
+          "price": 49.99,
+          "thumbnail": "assasins.jpg",
+          "code": "A001",
+          "stock": 50,
+          "status": true,
+          "category": [
+            "accion",
+            "aventura",
+            "historico"
+          ]
+        },
+        "qty": 3
       }
-    }
-  ]
-}]
+    ]
+  }
+]

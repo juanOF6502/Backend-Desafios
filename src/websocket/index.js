@@ -1,6 +1,8 @@
-const chatController = require('../repositories/chat.repository')
-const productController = require('../repositories/product.repository')
-const cartController = require('../repositories/cart.repository')
+const ManagerFactory = require('../repositories/factory')
+
+const chatController = ManagerFactory.getManagerInstace('chats')
+const productController = ManagerFactory.getManagerInstace('products')
+const cartController = ManagerFactory.getManagerInstace('carts')
 
 async function socketManager(socket) {
     const products = await productController.getAll()

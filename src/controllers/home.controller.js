@@ -2,6 +2,17 @@ const ManagerFactory = require('../repositories/factory')
 
 const productRepository = ManagerFactory.getManagerInstace('products')
 const userRepository = ManagerFactory.getManagerInstace('users')
+const cartRepository = ManagerFactory.getManagerInstace('carts')
+const ticketRepository = ManagerFactory.getManagerInstace('tickets')
+
+let lastOrderNumber = 0
+
+const generateNextOrderNumber = () => {
+    lastOrderNumber++
+    const paddedNumber = lastOrderNumber.toString().padStart(3, '0')
+    return `PO${paddedNumber}`
+}
+
 
 const homeRender = async(req, res) => {
     const { limit = 10, page = 1, sort, query, category, status } = req.query
@@ -15,7 +26,7 @@ const homeRender = async(req, res) => {
         title: 'Home',
         pageInfo,
         products,
-        userCart: req.user.cart,
+        userCart: req.user.cart._id,
         user: req.user ?  {
             ...req.user,
             isUser: req.user?.role == 'Usuario',
@@ -97,6 +108,64 @@ const cartRender = async (req,res) => {
     }
 }
 
+const purchaseRender = async (req,res) => {
+    try {
+        const cart = await cartRepository.getByInstance(req.user.cart._id)
+
+        const { products: productsInCart} = cart
+        const products = []
+        const productsNotPurchased = []
+
+        for (const { product: id, qty} of productsInCart) {
+            const item = await productRepository.getByInstance(id)
+
+            if (item.stock < qty) {
+                productsNotPurchased.push({
+                    product: id,
+                    qty
+                });
+                continue;
+            }
+
+            const toBuy = item.stock >= qty ? qty : item.stock
+
+            products.push({
+                product: id,
+                title: item.title,
+                qty: toBuy,
+                price: item.price
+            })
+
+            item.stock = item.stock - toBuy
+
+            await item.save()
+        }
+
+        const po = {
+            purchaser: req.user.email,
+            code: generateNextOrderNumber(),
+            amount: products.reduce((total, { price, qty }) => (price * qty ) + total,0),
+            products: products.map(({ product, title, price, qty }) => ({ product, title, price, qty })),
+            purchase_datetime: new Date().toLocaleString()
+        }
+
+        await ticketRepository.create(po)
+
+        cart.products = productsNotPurchased
+        
+        await cart.save()
+        
+        res.render('purchase', {
+            title: 'Purhcase',
+            po: po,
+            style: 'home'
+        })
+    } catch (error) {
+        console.error(error)
+        res.sendStatus(500)
+    }
+}
+
 const chatRender = (req, res) => {
     res.render('chat', {
         title: 'Chat',
@@ -125,6 +194,7 @@ module.exports = {
     productCategoriesRender,
     realTimeProductsRender,
     cartRender,
+    purchaseRender,
     chatRender,
     profileRender
 }

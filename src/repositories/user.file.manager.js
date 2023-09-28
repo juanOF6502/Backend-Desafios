@@ -32,6 +32,23 @@ class UserManager {
         return this.#users.find(user => user.email === email)
     }
 
+    async getUserByCartId(cartId) {
+        await this.#readFile()
+        return this.#users.find(user => user.cart?._id == cartId)
+    }
+
+    async getCartByUserId(userId) {
+        await this.#readFile()
+
+        const user = this.#users.find(user => user._id == userId)
+
+        if (!user) {
+            throw new Error('User not found')
+        }
+
+        return user.cart ?? { products: [] }
+    }
+
     async create(user) {
         await this.#readFile()
 

@@ -25,7 +25,7 @@ class ProductManager {
 
     async getById(id){
         await this.#readFile()
-        return this.#products.find(p => p.id == id)
+        return this.#products.find(p => p._id == id)
     }
 
     async create(product){
@@ -92,8 +92,11 @@ class ProductManager {
     async getAllPaged(limit = 10, page = 1, sort, query, category, status) {
         await this.#readFile()
     
+        let filteredProducts = this.#products
+        if(category){
+            filteredProducts = this.#products.filter(product => product.category.includes(category))
+        }
         
-        const filteredProducts = this.#products.filter(product => product.category.includes(category))
     
         const startIndex = (page - 1) * limit
         const endIndex = page * limit

@@ -53,15 +53,20 @@ const purchaseCart = async (req,res) => {
     const { cid } = req.params
 
     try {
-        const cart = await cartRepository.getById(cid)
+        const cart = await cartRepository.getByInstance(cid)
 
         const { products: productsInCart} = cart
         const products = []
+        const productsNotPurchased = []
 
         for (const { product: id, qty} of productsInCart) {
             const item = await productRepository.getByInstance(id)
 
             if (item.stock < qty) {
+                productsNotPurchased.push({
+                    product: id,
+                    qty
+                })
                 continue
             }
 
@@ -77,7 +82,6 @@ const purchaseCart = async (req,res) => {
             item.stock = item.stock - toBuy
 
             await item.save()
-
         }
 
         const po = {
@@ -89,10 +93,13 @@ const purchaseCart = async (req,res) => {
         }
 
         await ticketRepository.create(po)
+
+        cart.products = productsNotPurchased
         
-        res.send({purchaseOrder: po})
+        await cart.save()
+        
+        res.send({purchaseOrder: po, productsNotPurchased: productsNotPurchased})
     } catch (error) {
-        console.error(error)
         res.sendStatus(500)
     }
 }

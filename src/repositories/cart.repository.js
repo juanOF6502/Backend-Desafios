@@ -91,6 +91,10 @@ class CartRepository extends Repository {
             throw error
         }
     }
+
+    async getByInstance(id){
+        return await this.model.findById({ _id: id })
+    }
 }
 
 module.exports = new CartRepository()

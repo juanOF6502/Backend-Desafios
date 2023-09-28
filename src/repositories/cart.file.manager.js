@@ -1,6 +1,7 @@
 const fs = require('fs/promises')
 const path = require('path')
 const productManager = require('./product.file.manager')
+const userManager = require('./user.file.manager')
 
 
 class CarritoManager {
@@ -27,7 +28,7 @@ class CarritoManager {
 
     async getById(id){
         await this.#readFile()
-        return this.#carritos.find(p => p.id == id)
+        return this.#carritos.find(p => p._id == id)
     }
 
     async create(){
@@ -47,15 +48,19 @@ class CarritoManager {
         return newCart
     }
 
-    async addProductCart(id, productId) {
+    async addProductToCart(cartId, productId) {
         await this.#readFile()
 
-        const selectedCart = await this.getById(id)
+        const selectedCart = await this.getById(cartId)
+
+        if (!selectedCart) {
+            throw new Error('Cart not found')
+        }
 
         const addNewProduct = await productManager.getById(productId)
 
-        if(!addNewProduct){
-            return
+        if (!addNewProduct) {
+            throw new Error('Product not found')
         }
 
         const addedProduct = {
@@ -63,7 +68,7 @@ class CarritoManager {
             qty: 1
         }
 
-        const existingProductIndex = selectedCart.products.findIndex(p => p.product._id === productId)
+        const existingProductIndex = selectedCart.products.findIndex(p => p.product._id == productId)
 
         if (existingProductIndex !== -1) {
             selectedCart.products[existingProductIndex].qty += 1
@@ -73,7 +78,19 @@ class CarritoManager {
 
         await this.#writeFile()
 
-        return selectedCart
+        const user = await userManager.getUserByCartId(cartId)
+        if (user) {
+            const userCart = user.cart || { products: [] }
+            const userExistingProductIndex = userCart.products.findIndex(p => p.product._id == productId)
+
+            if (userExistingProductIndex !== -1) {
+                userCart.products[userExistingProductIndex].qty += 1
+            } else {
+                userCart.products.push(addedProduct)
+            }
+
+            await userManager.update(user._id, { cart: userCart })
+        }
     }
 
     async deleteCartProduct(cartId, productId) {

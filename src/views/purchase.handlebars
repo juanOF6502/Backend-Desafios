@@ -1,0 +1,27 @@
+<div class="container">
+    <h1>Detalle de la compra</h1>
+    <p>Purchaser: {{ po.purchaser }}</p>
+    <p>Codigo de orden: {{ po.code }}</p>
+    <p>Total: ${{ po.amount }}</p>
+    <p>Fecha: {{ po.purchase_datetime }}</p>
+
+    <h2 class="mt-2">Lista de productos</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="fw-bold">Producto</th>
+                    <th class="fw-bold">Precio</th>
+                    <th class="fw-bold">Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each po.products}}
+                <tr>
+                    <td>{{ this.title }}</td>
+                    <td>${{ this.price }}</td>
+                    <td>{{ this.qty }}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+</div>

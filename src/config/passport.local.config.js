@@ -11,7 +11,7 @@ const signup = async(req, email, password, done) => {
 
     const isAdmin = email === 'adminCoder@coder.com' && password === 'adminCod3r123'
 
-    const existingUser = await userManagerMDB.getByEmail(email)
+    const existingUser = await userRepository.getByEmail(email)
     if(existingUser){
         console.log('Usuario ya existente!')
         return done(null, false)
