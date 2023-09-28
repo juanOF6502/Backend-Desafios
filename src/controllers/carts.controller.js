@@ -1,15 +1,10 @@
 const ManagerFactory = require('../repositories/factory')
+const { v4: uuidv4 } = require('uuid')
+
 const cartRepository = ManagerFactory.getManagerInstace('carts')
 const productRepository = ManagerFactory.getManagerInstace('products')
 const ticketRepository = ManagerFactory.getManagerInstace('tickets')
 
-let lastOrderNumber = 0
-
-const generateNextOrderNumber = () => {
-    lastOrderNumber++
-    const paddedNumber = lastOrderNumber.toString().padStart(3, '0')
-    return `PO${paddedNumber}`
-}
 
 const getAll = async (req, res) => {
     const carts = await cartRepository.getAll()
@@ -86,7 +81,7 @@ const purchaseCart = async (req,res) => {
 
         const po = {
             purchaser: req.user.email,
-            code: generateNextOrderNumber(),
+            code: uuidv4(),
             amount: products.reduce((total, { price, qty }) => (price * qty ) + total,0),
             products: products.map(({ product, title, price, qty }) => ({ product, title, price, qty })),
             purchase_datetime: new Date().toLocaleString()
