@@ -1,4 +1,6 @@
-const productRepository = require('../repositories/product.repository')
+const ManagerFactory = require('../repositories/factory')
+
+const productRepository = ManagerFactory.getManagerInstace('products')
 
 const getAll = async (req, res) => {
     try {

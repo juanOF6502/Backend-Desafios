@@ -1,0 +1,266 @@
+[{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac86"
+  },
+  "title": "The Legend of Zelda: Breath of the Wild",
+  "description": "Videojuego de acción y aventura para Nintendo Switch",
+  "price": 59.99,
+  "thumbnail": "zelda.jpg",
+  "code": "Z001",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "aventura",
+    "fantasia"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac87"
+  },
+  "title": "Super Mario Odyssey",
+  "description": "Videojuego de plataformas para Nintendo Switch",
+  "price": 49.99,
+  "thumbnail": "marioodysey.jpg",
+  "code": "M001",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "aventura",
+    "exploracion",
+    "plataformas"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac88"
+  },
+  "title": "Grand Theft Auto V",
+  "description": "Videojuego de acción y aventura para PlayStation 4 y Xbox One",
+  "price": 39.99,
+  "thumbnail": "gtav.jpg",
+  "code": "G001",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "acción",
+    "mundo abierto",
+    "crimen"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac89"
+  },
+  "title": "The Last of Us Part II",
+  "description": "Videojuego de acción y aventura para PlayStation 4",
+  "price": 59.99,
+  "thumbnail": "lastofus.jpg",
+  "code": "T001",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "accion",
+    "supervivencia",
+    "zombis"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac8a"
+  },
+  "title": "Minecraft",
+  "description": "Videojuego de sandbox disponible en varias plataformas",
+  "price": 29.99,
+  "thumbnail": "minecraft.jpg",
+  "code": "M002",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "aventura",
+    "exploracion",
+    "construccion"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac8b"
+  },
+  "title": "FIFA 22",
+  "description": "Videojuego de simulación deportiva para PlayStation 5 y Xbox Series X/S",
+  "price": 69.99,
+  "thumbnail": "fifa.jpg",
+  "code": "F001",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "deportes",
+    "futbol",
+    "multijugador"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac8c"
+  },
+  "title": "Call of Duty: Warzone",
+  "description": "Videojuego de battle royale disponible en varias plataformas",
+  "price": 59.99,
+  "thumbnail": "warzone.jpg",
+  "code": "C001",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "FPS",
+    "multijugador"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac8d"
+  },
+  "title": "Assassin's Creed Valhalla",
+  "description": "Videojuego de rol y acción para PlayStation 5 y Xbox Series X/S",
+  "price": 49.99,
+  "thumbnail": "assasins.jpg",
+  "code": "A001",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "accion",
+    "aventura",
+    "historico"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac8e"
+  },
+  "title": "CYBERPUNK 2077",
+  "description": "Videojuego de acción para PlayStation 5 y Xbox Series X/S",
+  "price": 59.99,
+  "thumbnail": "cyber.jpg",
+  "status": true,
+  "code": "CP001",
+  "category": [
+    "accion",
+    "mundo abierto",
+    "ciencia ficcion"
+  ],
+  "stock": 50
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac8f"
+  },
+  "title": "Red Dead Redemption 2",
+  "description": "Action-adventure game for PlayStation 4 and Xbox One",
+  "price": 49.99,
+  "thumbnail": "reddead2.jpg",
+  "code": "R001",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "accion",
+    "mundo abierto",
+    "western"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac90"
+  },
+  "title": "Overwatch",
+  "description": "Multiplayer first-person shooter for PC, PlayStation 4, and Xbox One",
+  "price": 39.99,
+  "thumbnail": "overwatch.jpg",
+  "code": "O001",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "FPS",
+    "multijugador"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac91"
+  },
+  "title": "Super Smash Bros. Ultimate",
+  "description": "Fighting game for Nintendo Switch",
+  "price": 59.99,
+  "thumbnail": "smashbros.jpg",
+  "code": "S001",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "lucha",
+    "multijugador",
+    "crossover"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac92"
+  },
+  "title": "Horizon Zero Dawn",
+  "description": "Action role-playing game for PlayStation 4 and PC",
+  "price": 39.99,
+  "thumbnail": "horizon.jpg",
+  "code": "H001",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "accion",
+    "mundo abierto",
+    "robots"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac93"
+  },
+  "title": "Animal Crossing: New Horizons",
+  "description": "Life simulation game for Nintendo Switch",
+  "price": 49.99,
+  "thumbnail": "animalcrossing.jpg",
+  "code": "A002",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "simulacion"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64cc284d03b0eb6f955fac94"
+  },
+  "title": "God of War",
+  "description": "Action-adventure game for PlayStation 4",
+  "price": 39.99,
+  "thumbnail": "godofwar.jpg",
+  "code": "G002",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "accion",
+    "aventura"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64d0078f5657a54bb18fdbc9"
+  },
+  "title": "Edge of Eternity",
+  "description": "Videojuego de acción para PlayStation 5 y Xbox Series X/S",
+  "price": 49.99,
+  "thumbnail": "edge.jpg",
+  "code": "EE001",
+  "stock": 50,
+  "status": true,
+  "category": [
+    "accion",
+    "mundo abierto",
+    "ciencia ficcion"
+  ]
+}]

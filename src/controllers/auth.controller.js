@@ -1,4 +1,5 @@
-const userRepository = require('../repositories/user.repository')
+const ManagerFactory = require('../repositories/factory')
+const userRepository = ManagerFactory.getManagerInstace('users')
 const  generateToken  = require('../utils/generate.token')
 const { isValidPassword } = require('../utils/password.utils')
 

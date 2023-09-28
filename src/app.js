@@ -1,6 +1,19 @@
 (async () => {
-    const config = require('./config/config')
+    const { Command } = require('commander')
+
+    const program = new Command()
+
+    program.option('-e, --env <env>', 'Entorno de ejecucion', 'production')
+    program.parse(process.argv)
+
     const path = require('path')
+    const { env } = program.opts()
+
+    require('dotenv').config({
+        path: path.join(__dirname, env === 'production' ? '.env' : '.env.development')
+    })
+
+    const config = require('./config/config')
     const http = require('http')
 
     const express = require('express')

@@ -1,7 +1,8 @@
 const local = require('passport-local')
 
-const cartRepository = require('../repositories/cart.repository')
-const userRepository = require('../repositories/user.repository')
+const ManagerFactory = require('../repositories/factory')
+const cartRepository = ManagerFactory.getManagerInstace('carts')
+const userRepository = ManagerFactory.getManagerInstace('users')
 const { hashPassword, isValidPassword } = require('../utils/password.utils')
 const LocalStrategy = local.Strategy
 

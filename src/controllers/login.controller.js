@@ -1,5 +1,7 @@
 require('dotenv').config()
-const userRepository = require('../repositories/user.repository')
+
+const ManagerFactory = require('../repositories/factory')
+const userRepository = ManagerFactory.getManagerInstace('users')
 const { hashPassword } = require('../utils/password.utils')
 
 const logout = async (req, res) => {

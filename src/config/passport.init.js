@@ -1,5 +1,7 @@
 const passport = require('passport')
-const userRepository = require('../repositories/user.repository')
+
+const ManagerFactory = require('../repositories/factory')
+const userRepository = ManagerFactory.getManagerInstace('users')
 
 require('dotenv').config()
 const config = require('../config/config')

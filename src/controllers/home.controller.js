@@ -1,5 +1,7 @@
-const productRepository = require('../repositories/product.repository')
-const userRepository = require('../repositories/user.repository')
+const ManagerFactory = require('../repositories/factory')
+
+const productRepository = ManagerFactory.getManagerInstace('products')
+const userRepository = ManagerFactory.getManagerInstace('users')
 
 const homeRender = async(req, res) => {
     const { limit = 10, page = 1, sort, query, category, status } = req.query
@@ -98,6 +100,12 @@ const cartRender = async (req,res) => {
 const chatRender = (req, res) => {
     res.render('chat', {
         title: 'Chat',
+        userCart: req.user.cart,
+        user: req.user ?  {
+            ...req.user,
+            isUser: req.user?.role == 'Usuario',
+            isAdmin: req.user?.role == 'Admin',
+        } : null,
         style: 'home'
     })
 }

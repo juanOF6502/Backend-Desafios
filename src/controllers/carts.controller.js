@@ -1,6 +1,7 @@
-const cartRepository = require('../repositories/cart.repository')
-const productRepository = require('../repositories/product.repository')
-const ticketRepository = require('../repositories/ticket.repository')
+const ManagerFactory = require('../repositories/factory')
+const cartRepository = ManagerFactory.getManagerInstace('carts')
+const productRepository = ManagerFactory.getManagerInstace('products')
+const ticketRepository = ManagerFactory.getManagerInstace('tickets')
 
 let lastOrderNumber = 0
 
@@ -88,6 +89,7 @@ const purchaseCart = async (req,res) => {
         }
 
         await ticketRepository.create(po)
+        
         res.send({purchaseOrder: po})
     } catch (error) {
         console.error(error)

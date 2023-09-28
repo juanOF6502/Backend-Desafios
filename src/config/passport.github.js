@@ -1,7 +1,8 @@
 const githubStrategy = require('passport-github2')
 
-const userRepository = require('../repositories/user.repository')
-const cartRepository = require('../repositories/cart.repository')
+const ManagerFactory = require('../repositories/factory')
+const userRepository = ManagerFactory.getManagerInstace('users')
+const cartRepository = ManagerFactory.getManagerInstace('carts')
 const config = require('../config/config')
 
 const githubAccessConfig = {
