@@ -4,7 +4,7 @@
     const program = new Command()
 
     program.option('-e, --env <env>', 'Entorno de ejecucion', 'production')
-    program.parse(process.argv)
+    program.parse()
 
     const path = require('path')
     const { env } = program.opts()
