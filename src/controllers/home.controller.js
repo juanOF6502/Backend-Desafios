@@ -1,5 +1,8 @@
-const ManagerFactory = require('../repositories/factory')
 const { v4: uuidv4 } = require('uuid')
+const { CustomError, ErrorType } = require('../errors/custom.error')
+const ManagerFactory = require('../repositories/factory')
+
+
 
 const productRepository = ManagerFactory.getManagerInstace('products')
 const userRepository = ManagerFactory.getManagerInstace('users')
@@ -10,6 +13,10 @@ const homeRender = async(req, res) => {
     const { limit = 10, page = 1, sort, query, category, status } = req.query
 
     const { docs: products, ...pageInfo } = await productRepository.getAllPaged(limit, page, sort, query, category, status)
+
+    if(!products){
+        throw new CustomError('Error obtaining products', ErrorType.DB_ERROR)
+    }
 
     pageInfo.prevLink = pageInfo.hasPrevPage ? `http://localhost:8080/?page=${pageInfo.prevPage}&limit=${limit}` : ''
     pageInfo.nextLink = pageInfo.hasNextPage ? `http://localhost:8080/?page=${pageInfo.nextPage}&limit=${limit}` : ''
@@ -39,6 +46,10 @@ const productCategoriesRender = async (req, res) => {
 
     const { docs: products, ...pageInfo } = await productRepository.getAllPaged(limit, page, sort, query, category, status)
 
+    if(!products){
+        throw new CustomError('Error obtaining products', ErrorType.DB_ERROR)
+    }
+
     pageInfo.prevLink = pageInfo.hasPrevPage ? `http://localhost:8080/?page=${pageInfo.prevPage}&limit=${limit}` : ''
     pageInfo.nextLink = pageInfo.hasNextPage ? `http://localhost:8080/?page=${pageInfo.nextPage}&limit=${limit}` : ''
 
@@ -63,6 +74,46 @@ const productCategoriesRender = async (req, res) => {
     res.render('home', renderData)
 }
 
+const mockingproductsRender = async (req, res) => {
+    const { limit = 12, page = 1 } = req.query
+
+    const products = await productRepository.getAllMockProducts(limit, page)
+
+    if(!products){
+        throw new CustomError('Error obtaining mock products', ErrorType.GENERAL_ERROR)
+    }
+
+    const hasPrevPage = page > 1;
+    const hasNextPage = products.length === limit;
+    const prevLink = hasPrevPage ? `/mockingproducts?page=${parseInt(page) - 1}` : null;
+    const nextLink = hasNextPage ? `/mockingproducts?page=${parseInt(page) + 1}` : null;
+
+    const renderData = {
+        title: 'Mock Products',
+        products,
+        userCart: req.user.cart._id,
+        user: req.user ?  {
+            ...req.user,
+            isUser: req.user?.role == 'Usuario',
+            isAdmin: req.user?.role == 'Admin',
+        } : null,
+        pageInfo: {
+            hasPrevPage,
+            hasNextPage,
+            prevLink,
+            nextLink,
+            page: parseInt(page),
+        },
+        style: 'home'
+    }
+
+    if (req.originalUrl !== '/chat') {
+        renderData.showChatIcon = true
+    }
+
+    res.render('mockingproducts', renderData)
+}
+
 const realTimeProductsRender = async(req, res) => {
     const renderData = {
         title: 'Real Time Products',
@@ -77,9 +128,13 @@ const realTimeProductsRender = async(req, res) => {
 }
 
 const cartRender = async (req,res) => {
-    const user = await userRepository.populateUser(req.user._id)
+    try {
+        const user = await userRepository.populateUser(req.user._id)
 
-    if (user) {
+        if (!user) {
+            throw new CustomError('Error obtaing user', ErrorType.NOT_FOUND)
+        }
+
         const cart = user.cart ?? { products: [] }
 
         const total = cart.products.reduce((acc, item) => acc + item.product.price * item.qty, 0)
@@ -94,8 +149,10 @@ const cartRender = async (req,res) => {
                 isAdmin: req.user?.role == 'Admin'
             } : null,
             style: 'home'
-        });
-    } else {
+        })
+
+    } catch (error) {
+        console.error(error)
         res.status(500).send('Autorizacion no permitida')
     }
 }
@@ -154,7 +211,7 @@ const purchaseRender = async (req,res) => {
         })
     } catch (error) {
         console.error(error)
-        res.sendStatus(500)
+        throw new CustomError('Error al realizar la compra', ErrorType.GENERAL_ERROR)
     }
 }
 
@@ -181,10 +238,12 @@ const profileRender = (req, res) => {
     })
 }
 
+
 module.exports = {
     homeRender,
     productCategoriesRender,
     realTimeProductsRender,
+    mockingproductsRender,
     cartRender,
     purchaseRender,
     chatRender,

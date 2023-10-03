@@ -1,3 +1,4 @@
+const { CustomError, ErrorType } = require('../errors/custom.error')
 const ManagerFactory = require('../repositories/factory')
 
 const productRepository = ManagerFactory.getManagerInstace('products')
@@ -18,6 +19,7 @@ const getAll = async (req, res) => {
         } else {
             pageInfo.status = 'error'
             pageInfo.message = 'Error obtaining products'
+            throw new CustomError('Error obtaining products', ErrorType.DB_ERROR)
         }
 
         res.send({ pagination: pageInfo })
@@ -31,6 +33,9 @@ const getById = async (req, res) => {
     const pid = req.params.pid
     try {
         const product = await productRepository.getById(pid)
+        if (!product) {
+            throw new CustomError('Product not found', ErrorType.NOT_FOUND)
+        }
         res.send(product)
     } catch (error) {
         console.error(error)
@@ -45,7 +50,8 @@ const createProduct = async (req, res) => {
         io.emit('newProduct', product)
         res.status(201).send(product)
     } catch (error) {
-        res.status(400).send({ error: error.message })
+        console.error(error)
+        res.sendStatus(400)
     }
 }
 
@@ -53,27 +59,37 @@ const updateProduct = async (req, res) => {
     const { pid } = req.params
     const { body } = req
     
-    if(!await productRepository.getById(pid)){
-        res.sendStatus(404)
-        return
-    }
+    try {
+        const existingProduct = await productRepository.getById(pid)
+        if (!existingProduct) {
+            throw new CustomError('Product not found', ErrorType.NOT_FOUND)
+        }
 
-    await productRepository.update(pid, body)
-    res.sendStatus(200)
+        await productRepository.update(pid, body)
+        res.sendStatus(200)
+    } catch (error) {
+        console.error(error)
+        res.sendStatus(500)
+    }
 }
 
 const deleteProduct = async (req, res) => {
     const { pid } = req.params
     const { io } = req
 
-    if(!await productRepository.getById(pid)){
-        res.sendStatus(404)
-        return
-    }
+    try {
+        const existingProduct = await productRepository.getById(pid)
+        if (!existingProduct) {
+            throw new CustomError('Product not found', ErrorType.NOT_FOUND)
+        }
 
-    await productRepository.delete(pid)
-    io.emit('deleteProduct', pid)
-    res.sendStatus(200)
+        await productRepository.delete(pid)
+        io.emit('deleteProduct', pid)
+        res.sendStatus(200)
+    } catch (error) {
+        console.error(error)
+        res.sendStatus(500)
+    }
 }
 
 module.exports = {

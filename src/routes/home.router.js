@@ -4,6 +4,7 @@ const {
     homeRender,
     productCategoriesRender,
     realTimeProductsRender,
+    mockingproductsRender,
     cartRender,
     purchaseRender,
     chatRender,
@@ -18,8 +19,6 @@ router.get('/',isAuth, homeRender)
 
 router.get('/categoria/:category', isAuth, productCategoriesRender)
 
-router.get('/realtimeproducts', realTimeProductsRender)
-
 router.get('/cart', isAuth , cartRender)
 
 router.get('/cart/purchase', isAuth, purchaseRender)
@@ -27,5 +26,9 @@ router.get('/cart/purchase', isAuth, purchaseRender)
 router.get('/chat', checkUserRole(['Usuario']), chatRender)
 
 router.get('/profile', isAuth , profileRender)
+
+router.get('/mockingproducts', isAuth, mockingproductsRender)
+
+router.get('/realtimeproducts', realTimeProductsRender)
 
 module.exports = router

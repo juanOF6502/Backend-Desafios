@@ -1,3 +1,4 @@
+const { CustomError, ErrorType } = require('../errors/custom.error')
 const ManagerFactory = require('../repositories/factory')
 const { v4: uuidv4 } = require('uuid')
 
@@ -7,8 +8,16 @@ const ticketRepository = ManagerFactory.getManagerInstace('tickets')
 
 
 const getAll = async (req, res) => {
-    const carts = await cartRepository.getAll()
-    res.send({Carts:carts})
+    try {
+        const carts = await cartRepository.getAll()
+        if(!carts){
+            throw new CustomError('Error obtaining carts', ErrorType.DB_ERROR)
+        }
+        res.send({ Carts: carts })
+    } catch (error) {
+        console.error(error)
+        res.sendStatus(500)
+    }
 }
 
 const getById = async (req, res) => {
@@ -18,7 +27,7 @@ const getById = async (req, res) => {
         if (cart) {
             res.send(cart)
         } else {
-            res.sendStatus(404)
+            throw new CustomError('Cart not found', ErrorType.NOT_FOUND)
         }
     } catch (error) {
         console.error(error)
@@ -28,8 +37,17 @@ const getById = async (req, res) => {
 
 const createCart = async (req, res) => {
     const { body } = req
-    const cart = await cartRepository.create(body)
-    res.send(cart)
+
+    try {
+        const cart = await cartRepository.create(body)
+        if(!cart){
+            throw new CustomError('Cart not found', ErrorType.NOT_FOUND)
+        }
+        res.send(cart)
+    } catch (error) {
+        console.error(error)
+        res.sendStatus(500)
+    }
 }
 
 const addProductToCart = async (req, res) => {
@@ -37,6 +55,9 @@ const addProductToCart = async (req, res) => {
 
     try {
         const updatedCart = await cartRepository.addProductToCart(cid, pid)
+        if(!updatedCart){
+            throw new CustomError('Error adding product to cart', ErrorType.DB_ERROR)
+        }
         res.send(updatedCart)
     } catch (error) {
         console.error(error)
@@ -99,7 +120,7 @@ const purchaseCart = async (req,res) => {
     }
 }
 
-const upadteCart = async (req, res) => {
+const updateCart = async (req, res) => {
     const { cid } = req.params
     const { body } = req
 
@@ -108,7 +129,7 @@ const upadteCart = async (req, res) => {
         res.sendStatus(200)
     } catch (error) {
         console.error(error)
-        res.sendStatus(500)
+        throw new CustomError('Error al actualizar el carrito', ErrorType.GENERAL_ERROR)
     }
 }
 
@@ -121,7 +142,7 @@ const updateProductQuantity = async (req, res) => {
         res.sendStatus(200)
     } catch (error) {
         console.error(error)
-        res.sendStatus(500)
+        throw new CustomError('Error al actualizar la cantidad del producto en el carrito', ErrorType.GENERAL_ERROR)
     }
 }
 
@@ -133,7 +154,7 @@ const deleteProduct = async (req, res) => {
         res.sendStatus(200)
     } catch (error) {
         console.error(error)
-        res.sendStatus(500)
+        throw new CustomError('Error al eliminar el producto del carrito', ErrorType.GENERAL_ERROR)
     }
 }
 
@@ -145,7 +166,7 @@ const deleteAllProducts = async (req, res) => {
         res.sendStatus(200)
     } catch (error) {
         console.error(error)
-        res.sendStatus(500)
+        throw new CustomError('Error al eliminar todos los productos del carrito', ErrorType.GENERAL_ERROR)
     }
 }
 
@@ -156,7 +177,7 @@ module.exports = {
     createCart,
     addProductToCart,
     purchaseCart,
-    upadteCart,
+    updateCart,
     updateProductQuantity,
     deleteProduct,
     deleteAllProducts

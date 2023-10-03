@@ -1,5 +1,6 @@
 const Repository = require('./base.repository')
 const productModel = require('../models/product.model')
+const { generateProducts } = require('../utils/mock.utils')
 
 class ProductRepository extends Repository {
     constructor(){
@@ -31,6 +32,18 @@ class ProductRepository extends Repository {
 
     async getByInstance(id){
         return await this.model.findById({ _id: id })
+    }
+
+    async getAllMockProducts(limit = 10, page = 1) {
+        const allProducts = generateProducts()
+
+        const startIndex = (page - 1) * limit
+
+        const endIndex = page * limit
+        
+        const paginatedProducts = allProducts.slice(startIndex, endIndex)
+    
+        return paginatedProducts
     }
 }
 

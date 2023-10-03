@@ -1,8 +1,11 @@
 require('dotenv').config()
 
-const ManagerFactory = require('../repositories/factory')
-const userRepository = ManagerFactory.getManagerInstace('users')
 const { hashPassword } = require('../utils/password.utils')
+const { CustomError, ErrorType } = require('../errors/custom.error')
+const ManagerFactory = require('../repositories/factory')
+
+const userRepository = ManagerFactory.getManagerInstace('users')
+
 
 const logout = async (req, res) => {
     const { firstname } = req.user
@@ -21,11 +24,11 @@ const resetpassword = async (req, res) => {
     const user = await userRepository.getByEmail(email)
 
     if(!user) {
-        return res.render('resetpassword', { error: 'Usuario no existe!' })
+        throw new CustomError('Error obtaining user', ErrorType.NOT_FOUND)
     }
 
     if(password1 !== password2) {
-        return res.render('resetpassword', { error: 'Las contraseñas deben coincidir!' })
+        throw new CustomError('Passwords must coincide', ErrorType.AUTH_ERROR)
     }
 
     try {
@@ -37,7 +40,7 @@ const resetpassword = async (req, res) => {
         res.redirect('/login')
     } catch (e) {
         console.log(e)
-        return res.render('resetpassword', { error: 'Ha ocurrido un error' })
+        throw new CustomError('Ha ocurrido un error', ErrorType.GENERAL_ERROR)
     }
 }
 

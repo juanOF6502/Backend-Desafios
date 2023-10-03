@@ -5,7 +5,7 @@ const {
     createCart,
     addProductToCart,
     purchaseCart,
-    upadteCart,
+    updateCart,
     updateProductQuantity,
     deleteProduct,
     deleteAllProducts
@@ -24,7 +24,7 @@ router.post('/:cid/product/:pid',checkUserRole(['Usuario']), addProductToCart)
 
 router.get('/:cid/purchase', purchaseCart)
 
-router.put('/:cid', upadteCart)
+router.put('/:cid', updateCart)
 
 router.put('/:cid/products/:pid', updateProductQuantity)
 

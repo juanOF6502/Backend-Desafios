@@ -59,7 +59,6 @@ const login = async (email, password, done) => {
         }
 
         if(!isValidPassword(password, existingUser.password)){
-            console.log('Error')
             return done(null, false)
         }
 

@@ -1,3 +1,4 @@
+const { CustomError, ErrorType } = require('../errors/custom.error')
 const ManagerFactory = require('../repositories/factory')
 const userRepository = ManagerFactory.getManagerInstace('users')
 const  generateToken  = require('../utils/generate.token')
@@ -10,7 +11,7 @@ const authLogin = async (req, res) => {
         const user = await userRepository.getByEmail(email)
 
         if(!user || !isValidPassword(password, user?.password)){
-            return res.send({status: 'Fail', error: 'Invalid user or password'})
+            throw new CustomError('Invalid user or password', ErrorType.AUTH_ERROR)
         }
     
         const token = generateToken(user)
