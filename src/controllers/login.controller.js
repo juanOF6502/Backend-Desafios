@@ -3,7 +3,9 @@ require('dotenv').config()
 const { hashPassword } = require('../utils/password.utils')
 const { CustomError, ErrorType } = require('../errors/custom.error')
 const ManagerFactory = require('../repositories/factory')
+const { developmentLogger, productionLogger } = require('../logger')
 
+const logger = process.env.NODE_ENV === 'production' ? productionLogger : developmentLogger
 const userRepository = ManagerFactory.getManagerInstace('users')
 
 

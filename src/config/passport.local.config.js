@@ -1,10 +1,14 @@
 const local = require('passport-local')
 
 const ManagerFactory = require('../repositories/factory')
+const { developmentLogger, productionLogger } = require('../logger')
+const { hashPassword, isValidPassword } = require('../utils/password.utils')
+
+const LocalStrategy = local.Strategy
+const logger = process.env.NODE_ENV === 'production' ? productionLogger : developmentLogger
 const cartRepository = ManagerFactory.getManagerInstace('carts')
 const userRepository = ManagerFactory.getManagerInstace('users')
-const { hashPassword, isValidPassword } = require('../utils/password.utils')
-const LocalStrategy = local.Strategy
+
 
 
 const signup = async(req, email, password, done) => {

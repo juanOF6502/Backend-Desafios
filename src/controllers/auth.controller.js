@@ -3,7 +3,9 @@ const ManagerFactory = require('../repositories/factory')
 const userRepository = ManagerFactory.getManagerInstace('users')
 const  generateToken  = require('../utils/generate.token')
 const { isValidPassword } = require('../utils/password.utils')
+const { developmentLogger, productionLogger } = require('../logger')
 
+const logger = process.env.NODE_ENV === 'production' ? productionLogger : developmentLogger
 
 const authLogin = async (req, res) => {
     const { email, password } = req.body

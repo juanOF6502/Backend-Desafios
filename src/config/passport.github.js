@@ -1,9 +1,12 @@
+const config = require('../config/config')
 const githubStrategy = require('passport-github2')
+const { developmentLogger, productionLogger } = require('../logger')
 
+const logger = process.env.NODE_ENV === 'production' ? productionLogger : developmentLogger
 const ManagerFactory = require('../repositories/factory')
 const userRepository = ManagerFactory.getManagerInstace('users')
 const cartRepository = ManagerFactory.getManagerInstace('carts')
-const config = require('../config/config')
+
 
 
 const githubAccessConfig = {

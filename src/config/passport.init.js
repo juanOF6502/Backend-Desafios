@@ -1,13 +1,11 @@
 const passport = require('passport')
+const { LocalStrategy, signup, login } = require('./passport.local.config')
+const { githubStrategy, githubAccessConfig, profileGitController } = require('./passport.github')
+const config = require('../config/config')
 
 const ManagerFactory = require('../repositories/factory')
 const userRepository = ManagerFactory.getManagerInstace('users')
 
-require('dotenv').config()
-const config = require('../config/config')
-
-const { LocalStrategy, signup, login } = require('./passport.local.config')
-const { githubStrategy, githubAccessConfig, profileGitController } = require('./passport.github')
 
 const init = () => {
     passport.use('local-signup', new LocalStrategy({ usernameField: 'email', passReqToCallback: true}, signup))

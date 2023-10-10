@@ -2,7 +2,9 @@ const { v4: uuidv4 } = require('uuid')
 
 const { CustomError, ErrorType } = require('../errors/custom.error')
 const ManagerFactory = require('../repositories/factory')
+const { developmentLogger, productionLogger } = require('../logger')
 
+const logger = process.env.NODE_ENV === 'production' ? productionLogger : developmentLogger
 const productRepository = ManagerFactory.getManagerInstace('products')
 const userRepository = ManagerFactory.getManagerInstace('users')
 const cartRepository = ManagerFactory.getManagerInstace('carts')

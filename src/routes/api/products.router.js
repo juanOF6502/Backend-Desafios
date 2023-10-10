@@ -7,7 +7,6 @@ const {
     updateProduct, 
     deleteProduct
 } = require('../../controllers/products.controller')
-const { currentUser } = require('../../controllers/session.controller')
 const { checkUserRole } = require('../../middlewares/authorize.middleware')
 
 const router = Router()

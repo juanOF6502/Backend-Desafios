@@ -1,6 +1,10 @@
 const { CustomError, ErrorType } = require('../errors/custom.error')
 const ManagerFactory = require('../repositories/factory')
 const { v4: uuidv4 } = require('uuid')
+const { developmentLogger, productionLogger } = require('../logger')
+const e = require('express')
+
+const logger = process.env.NODE_ENV === 'production' ? productionLogger : developmentLogger
 
 const cartRepository = ManagerFactory.getManagerInstace('carts')
 const productRepository = ManagerFactory.getManagerInstace('products')
@@ -15,7 +19,7 @@ const getAll = async (req, res) => {
         }
         res.send({ Carts: carts })
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         res.sendStatus(500)
     }
 }
@@ -30,7 +34,7 @@ const getById = async (req, res) => {
             throw new CustomError('Cart not found', ErrorType.NOT_FOUND)
         }
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         res.sendStatus(500)
     }
 }
@@ -45,7 +49,7 @@ const createCart = async (req, res) => {
         }
         res.send(cart)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         res.sendStatus(500)
     }
 }
@@ -60,7 +64,7 @@ const addProductToCart = async (req, res) => {
         }
         res.send(updatedCart)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         res.sendStatus(500)
     }
 }
@@ -116,6 +120,7 @@ const purchaseCart = async (req,res) => {
         
         res.send({purchaseOrder: po, productsNotPurchased: productsNotPurchased})
     } catch (error) {
+        logger.error(error)
         res.sendStatus(500)
     }
 }
