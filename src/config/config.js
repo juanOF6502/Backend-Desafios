@@ -6,5 +6,6 @@ module.exports = {
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     GITHUB_STRATEGY_NAME: process.env.GITHUB_STRATEGY_NAME,
-    PERSISTANCE: process.env.PERSISTANCE
+    PERSISTANCE: process.env.PERSISTANCE,
+    NODE_ENV: process.env.NODE_ENV
 }

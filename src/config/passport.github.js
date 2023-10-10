@@ -5,6 +5,7 @@ const userRepository = ManagerFactory.getManagerInstace('users')
 const cartRepository = ManagerFactory.getManagerInstace('carts')
 const config = require('../config/config')
 
+
 const githubAccessConfig = {
     clientID: config.GITHUB_CLIENT_ID,
     clientSecret: config.GITHUB_CLIENT_SECRET,
@@ -43,7 +44,7 @@ const profileGitController = async(accessToken, refreshToken, profile, done) => 
     try {
         return await githubUsers(profile,  done)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         done(error)
     }
 }

@@ -39,7 +39,7 @@ const resetpassword = async (req, res) => {
 
         res.redirect('/login')
     } catch (e) {
-        console.log(e)
+        logger.error(e)
         throw new CustomError('Ha ocurrido un error', ErrorType.GENERAL_ERROR)
     }
 }

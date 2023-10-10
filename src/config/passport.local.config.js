@@ -6,6 +6,7 @@ const userRepository = ManagerFactory.getManagerInstace('users')
 const { hashPassword, isValidPassword } = require('../utils/password.utils')
 const LocalStrategy = local.Strategy
 
+
 const signup = async(req, email, password, done) => {
     const { email: _email, password: _password, password2: _password2, ...user} = req.body
 
@@ -13,7 +14,7 @@ const signup = async(req, email, password, done) => {
 
     const existingUser = await userRepository.getByEmail(email)
     if(existingUser){
-        console.log('Usuario ya existente!')
+        logger.info('Usuario ya existente!')
         return done(null, false)
     }
 
@@ -37,7 +38,7 @@ const signup = async(req, email, password, done) => {
             ...newUser._doc
         })
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         done(error, false)
     }
 }
@@ -64,7 +65,7 @@ const login = async (email, password, done) => {
 
         done(null, existingUser)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         done(error, false)
     }
 }

@@ -1,8 +1,7 @@
 const { v4: uuidv4 } = require('uuid')
+
 const { CustomError, ErrorType } = require('../errors/custom.error')
 const ManagerFactory = require('../repositories/factory')
-
-
 
 const productRepository = ManagerFactory.getManagerInstace('products')
 const userRepository = ManagerFactory.getManagerInstace('users')
@@ -152,7 +151,7 @@ const cartRender = async (req,res) => {
         })
 
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         res.status(500).send('Autorizacion no permitida')
     }
 }
@@ -210,7 +209,7 @@ const purchaseRender = async (req,res) => {
             style: 'home'
         })
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         throw new CustomError('Error al realizar la compra', ErrorType.GENERAL_ERROR)
     }
 }

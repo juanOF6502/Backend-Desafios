@@ -97,7 +97,6 @@ class ProductManager {
             filteredProducts = this.#products.filter(product => product.category.includes(category))
         }
         
-    
         const startIndex = (page - 1) * limit
         const endIndex = page * limit
         const slicedProducts = filteredProducts.slice(startIndex, endIndex)

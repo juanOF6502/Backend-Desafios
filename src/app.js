@@ -26,7 +26,9 @@
 
     const Routes = require('./routes/index')
     const socketManager = require('./websocket')
+    const logger = config.NODE_ENV === 'production' ? require('./logger').productionLogger : require('./logger').developmentLogger
     const initPassport = require('./config/passport.init')
+    const loggerMiddleware = require('./middlewares/logger.middleware')
 
     try {
         await mongoose.connect(config.MONGO_URL)
@@ -34,6 +36,8 @@
         const app = express()
         const server = http.createServer(app)
         const io = new Server(server)
+
+        app.use(loggerMiddleware)
 
         // Configuración de Handlebars
         app.engine('handlebars', handlebars.engine())
@@ -75,11 +79,11 @@
 
         // Iniciar el servidor
         server.listen(process.env.PORT, () => {
-            console.log(`Server listening at http://localhost:${config.PORT}`)
+            logger.info(`Server listening at http://localhost:${config.PORT}`)
         })
         
-        console.log('Connected to database')
+        logger.debug('Connected to database')
     } catch (error) {
-        console.error('Error connecting to database:', error)
+        logger.error('Error connecting to database:', error)
     }
 })()

@@ -4,6 +4,7 @@ const userRepository = ManagerFactory.getManagerInstace('users')
 const  generateToken  = require('../utils/generate.token')
 const { isValidPassword } = require('../utils/password.utils')
 
+
 const authLogin = async (req, res) => {
     const { email, password } = req.body
 
@@ -18,7 +19,7 @@ const authLogin = async (req, res) => {
     
         return res.send({status: 'Success', mesagge: token})
     } catch (error) {
-        console.log(error)
+        logger.error(error)
         res.status(500).send({status: 'failure', error})
     }
 }

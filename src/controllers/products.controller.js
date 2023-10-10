@@ -24,7 +24,7 @@ const getAll = async (req, res) => {
 
         res.send({ pagination: pageInfo })
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         res.sendStatus(500)
     }
 }
@@ -38,7 +38,7 @@ const getById = async (req, res) => {
         }
         res.send(product)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         res.sendStatus(404)
     }
 }
@@ -50,7 +50,7 @@ const createProduct = async (req, res) => {
         io.emit('newProduct', product)
         res.status(201).send(product)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         res.sendStatus(400)
     }
 }
@@ -68,7 +68,7 @@ const updateProduct = async (req, res) => {
         await productRepository.update(pid, body)
         res.sendStatus(200)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         res.sendStatus(500)
     }
 }
@@ -87,7 +87,7 @@ const deleteProduct = async (req, res) => {
         io.emit('deleteProduct', pid)
         res.sendStatus(200)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         res.sendStatus(500)
     }
 }

@@ -128,7 +128,7 @@ const updateCart = async (req, res) => {
         await cartRepository.updatedCartProducts(cid, body)
         res.sendStatus(200)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         throw new CustomError('Error al actualizar el carrito', ErrorType.GENERAL_ERROR)
     }
 }
@@ -141,7 +141,7 @@ const updateProductQuantity = async (req, res) => {
         await cartRepository.updateProductQuantity(cid, pid, qty)
         res.sendStatus(200)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         throw new CustomError('Error al actualizar la cantidad del producto en el carrito', ErrorType.GENERAL_ERROR)
     }
 }
@@ -153,7 +153,7 @@ const deleteProduct = async (req, res) => {
         await cartRepository.deleteCartProduct(cid, pid)
         res.sendStatus(200)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         throw new CustomError('Error al eliminar el producto del carrito', ErrorType.GENERAL_ERROR)
     }
 }
@@ -165,7 +165,7 @@ const deleteAllProducts = async (req, res) => {
         await cartRepository.deleteAllCartProducts(cid)
         res.sendStatus(200)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         throw new CustomError('Error al eliminar todos los productos del carrito', ErrorType.GENERAL_ERROR)
     }
 }
