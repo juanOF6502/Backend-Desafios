@@ -2,8 +2,9 @@ const { Router } = require('express')
 const passport = require('passport')
 require('dotenv').config()
 
-const { logout, resetpassword, githubCallBack } = require('../controllers/login.controller')
+const { logout, resetpassword, githubCallBack, recoverpassword } = require('../controllers/login.controller')
 const isAuth = require('../middlewares/auth.middleware')
+const verifyToken = require('../middlewares/verify.token.middleware')
 
 
 const router = Router()
@@ -16,9 +17,11 @@ router.get('/signup', (req, res) => res.render('signup'))
 
 router.get('/login', (req, res) => res.render('login'))
 
-router.get('/resetpassword', (req, res) => res.render('resetpassword'))
+router.get('/resetpassword', verifyToken, (req, res) => res.render('resetpassword'))
 
 router.get('/logout', isAuth , logout)
+
+router.get('/recoverpassword', (req, res) => res.render('recoverpassword'))
 
 router.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/profile',
@@ -31,6 +34,8 @@ router.post('/login', passport.authenticate('local-login', {
 }))
 
 router.post('/resetpassword', resetpassword)
+
+router.post('/recoverpassword', recoverpassword)
 
 
 module.exports = router

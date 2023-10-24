@@ -2,7 +2,6 @@ const { CustomError, ErrorType } = require('../errors/custom.error')
 const ManagerFactory = require('../repositories/factory')
 const { v4: uuidv4 } = require('uuid')
 const { developmentLogger, productionLogger } = require('../logger')
-const e = require('express')
 
 const logger = process.env.NODE_ENV === 'production' ? productionLogger : developmentLogger
 
@@ -56,12 +55,25 @@ const createCart = async (req, res) => {
 
 const addProductToCart = async (req, res) => {
     const { cid, pid } = req.params
+    const { user } = req
 
     try {
+        const product = await productRepository.getById(pid)
+
+        if (!product) {
+            throw new CustomError('Product not found', ErrorType.NOT_FOUND)
+        }
+
+        if (product.owner.toString() === user._id.toString()) {
+            throw new CustomError('Cannot add product due to credentials', ErrorType.UNAUTHORIZED)
+        }
+
         const updatedCart = await cartRepository.addProductToCart(cid, pid)
-        if(!updatedCart){
+
+        if (!updatedCart) {
             throw new CustomError('Error adding product to cart', ErrorType.DB_ERROR)
         }
+
         res.send(updatedCart)
     } catch (error) {
         logger.error(error)

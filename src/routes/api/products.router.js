@@ -15,7 +15,7 @@ router.get('/', getAll)
 
 router.get('/:pid', getById)
 
-router.post('/', checkUserRole(['Admin']), createProduct)
+router.post('/', checkUserRole(['Admin', 'Premium']), createProduct)
 
 router.put('/:pid', checkUserRole(['Admin']), updateProduct)
 

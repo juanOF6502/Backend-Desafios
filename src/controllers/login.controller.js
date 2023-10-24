@@ -1,5 +1,7 @@
-require('dotenv').config()
+const config = require('../config/config')
+const jwt = require('jsonwebtoken')
 
+const mailSenderService = require('../services/mail.sender')
 const { hashPassword } = require('../utils/password.utils')
 const { CustomError, ErrorType } = require('../errors/custom.error')
 const ManagerFactory = require('../repositories/factory')
@@ -58,8 +60,36 @@ const githubCallBack = (req, res) => {
     res.redirect('/')
 }
 
+const recoverpassword = (req, res) => {
+    const { email } = req.body
+
+    const token = jwt.sign({ email }, config.JWT_SECRET, { expiresIn: '1h' })
+    
+    const resetLink = `http://localhost:8080/resetpassword?token=${token}`
+
+    const template = `
+        <html>
+            <body>
+                <div style="font-family: Arial, sans-serif; background-color: #f2f2f2; text-align: center;">
+                    <div style="background-color: #fff; border-radius: 10px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); padding: 20px; max-width: 400px; margin: 0 auto;">
+                        <h1 style="color: #333;">Recuperación de contraseña</h1>
+                        <p style="font-size: 16px; line-height: 1.5;">Ingresa al siguiente enlace para restablecer tu contraseña:</p>
+                        <a href="${resetLink}" style="display: inline-block; padding: 10px 20px; margin: 20px 0; background-color: #007BFF; color: #fff; text-decoration: none; border-radius: 5px;">RESTABLECER CONTRASEÑA</a>
+                        <p style="font-size: 16px; line-height: 1.5;"><strong>El enlace expirará en 1 hora.</strong></p>
+                    </div>
+                </div>
+            </body>
+        </html>
+    `
+
+    mailSenderService.send(email, template)
+
+    res.redirect('/login')
+}
+
 module.exports = {
     logout,
     resetpassword,
-    githubCallBack
+    githubCallBack,
+    recoverpassword
 }
