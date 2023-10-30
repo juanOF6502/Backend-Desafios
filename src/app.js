@@ -23,6 +23,8 @@
     const session = require('express-session')
     const MongoStore = require('connect-mongo')
     const passport = require('passport')
+    const swaggerJsDoc = require('swagger-jsdoc')
+    const swaggerUiExpress = require('swagger-ui-express')
 
     const Routes = require('./routes/index')
     const socketManager = require('./websocket')
@@ -32,12 +34,28 @@
 
     try {
         await mongoose.connect(config.MONGO_URL)
-        
+
         const app = express()
         const server = http.createServer(app)
         const io = new Server(server)
 
+
         app.use(loggerMiddleware)
+
+        const specs = swaggerJsDoc({
+            definition: {
+                openapi: '3.0.1',
+                info: {
+                    title: 'Proyecto Backend API',
+                    description: 'Documentacion de modulos de productos y carrito de API'
+                }
+            },
+            apis: [`${__dirname}/docs/*.yaml`]
+        })
+        
+
+        //Configuracion de Swagger
+        app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
         // Configuración de Handlebars
         app.engine('handlebars', handlebars.engine())

@@ -1,0 +1,184 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtener todos los productos
+      tags:
+        - Products
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Product'
+        500:
+          description: Failure
+    post:
+      summary: Crear un producto
+      tags:
+        - Products
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/responses/resProduct'
+        500:
+          description: Failure
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/Product'
+  /api/products/{pid}:
+    get:
+      summary: Obtener un producto por ID
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: El id del producto de mongoDB
+          schema:
+            $type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Product'
+        500:
+          description: Failure
+    put:
+      summary: Actualizar un producto por ID
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: El id del producto de mongoDB
+          schema:
+            $type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/responses/resProduct'
+        500:
+          description: Failure
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/Product'
+    delete:
+      summary: Eliminar un producto por ID
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: El id del producto de mongoDB
+          schema:
+            $type: string
+components:
+  responses:
+    resProduct:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+            type: object
+            $ref: '#components/schemas/Product'
+  requestBodies:
+    Product:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Titulo de producto
+        description: 
+          type: string
+          description: Descripcion de producto
+        price:
+          type: number
+          description: Precio de producto
+        thumbnail:
+          type: string
+          description: Imagen del producto
+        code: 
+          type: string
+          description: Codigo del producto
+        stock: 
+          type: number
+          description: Stock de producto
+        status: 
+          type: boolean
+          description: Disponibilidad de producto
+        category: 
+          type: array
+          description: Categorias de producto
+        owner: 
+          type: string  
+          description: Id de dueño del producto u ADMIN por defecto
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string  
+          description: ID de mongoDB
+        title:
+          type: string
+          description: Titulo de producto
+        description: 
+          type: string
+          description: Descripcion de producto
+        price:
+          type: number
+          description: Precio de producto
+        thumbnail:
+          type: string
+          description: Imagen del producto
+        code: 
+          type: string
+          description: Codigo del producto
+        stock: 
+          type: number
+          description: Stock de producto
+        status: 
+          type: boolean
+          description: Disponibilidad de producto
+        category: 
+          type: array
+          description: Categorias de producto
+        owner: 
+          type: string  
+          description: Id de dueño del producto u ADMIN por defecto
+      example:
+        _id: ObjectID('XXX')
+        title: The Legend of Zelda
+        description: Juego de aventura de NES
+        price: 59.99
+        thumbnail: thumbnail.jpg
+        code: LZ001
+        stock: 50
+        status: true
+        category: ['Aventura', 'RPG']
+        owner: Admin

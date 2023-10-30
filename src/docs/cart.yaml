@@ -1,0 +1,214 @@
+paths:
+  /api/carts:
+    get:
+      summary: Obtener todos los carritos
+      tags:
+        - Carts
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Cart'
+        500:
+          description: Failure
+    post:
+      summary: Crear un carrito
+      tags:
+        - Carts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/Cart'
+  /api/carts/{cid}:
+    get:
+      summary: Obtener un carrito por ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: El id del carrito de mongoDB
+          schema:
+            $type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Cart'
+        500:
+          description: Failure
+    put:
+      summary: Actualizar un carrito por ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: El id del carrito de mongoDB
+          schema:
+            $type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/Cart'
+    delete:
+      summary: Eliminar todos los productos de un carrito
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: El id del carrito de mongoDB
+          schema:
+            $type: string
+  /api/carts/{cid}/purchase:
+    get:
+      summary: Finalizar compra de un carrito
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: El id del carrito de mongoDB
+          schema:
+            $type: string
+  /api/carts/{cid}/product/{pid}:
+    post:
+        summary: Añadir producto a carrito
+        tags:
+          - Carts
+        parameters:
+          - name: cid
+            in: path
+            required: true
+            description: El id del carrito de mongoDB
+            schema:
+              $type: string
+          - name: pid
+            in: path
+            required: true
+            description: El id del producto de mongoDB
+            schema:
+              $type: string
+        responses:
+          200:
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/Cart'
+          500:
+            description: Failure
+  /api/carts/{cid}/products/{pid}:
+    put:
+      summary: Actualizar cantidad de producto de un carrito
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: El id del carrito de mongoDB
+          schema:
+            $type: string
+        - name: pid
+          in: path
+          required: true
+          description: El id del producto de mongoDB
+          schema:
+            $type: string
+      responses:
+          200:
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/Cart'
+          500:
+            description: Failure
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/UpdateProductQty'
+    delete:
+      summary: Eliminar un producto de un carrito
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: El id del carrito de mongoDB
+          schema:
+            $type: string
+        - name: pid
+          in: path
+          required: true
+          description: El id del producto de mongoDB
+          schema:
+            $type: string
+
+components:
+  requestBodies:
+    Cart:
+      type: object
+      properties:
+        _id: 
+          type: string
+        products: 
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+              qty:
+                type: number
+              _id:
+                type: string
+    UpdateProductQty:
+      type: object
+      properties:
+        qty:
+          type: number
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id: 
+          type: string
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+              qty:
+                type: number
+              _id:
+                type: string
+      example:
+        _id: '65158h3aa5762182d5bd49ea'
+        products:
+          - product: '603f181823hfe09fhe'
+            qty: 2
+            _id: '653fb90713d2de0eda8bc357'
