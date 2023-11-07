@@ -15,10 +15,10 @@ router.get('/', getAll)
 
 router.get('/:pid', getById)
 
-router.post('/', checkUserRole(['Admin', 'Premium']), createProduct)
+router.post('/', createProduct)
 
-router.put('/:pid', checkUserRole(['Admin']), updateProduct)
+router.put('/:pid', updateProduct)
 
-router.delete('/:pid', checkUserRole(['Admin']), deleteProduct)
+router.delete('/:pid', deleteProduct)
 
 module.exports = router

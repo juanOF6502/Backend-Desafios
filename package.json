@@ -25,7 +25,8 @@
   "description": "Manejador de paqutes usado para los desafios del curso de Backend",
   "main": "app.js",
   "scripts": {
-    "start:express": "nodemon src/app.js"
+    "start:express": "nodemon src/app.js",
+    "test": "mocha src/tests/integration.test.js"
   },
   "keywords": [
     "backend",
@@ -40,6 +41,9 @@
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^8.1.0",
-    "nodemon": "^2.0.22"
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.3"
   }
 }

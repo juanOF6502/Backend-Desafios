@@ -48,10 +48,6 @@ const getById = async (req, res) => {
 const createProduct = async (req, res) => {
     const { body, io, user } = req
     try {
-        if (user.role === 'Premium') {
-            body.owner = user.id
-        }
-
         const product = await productRepository.create(body)
         io.emit('newProduct', product)
         res.status(201).send(product)
@@ -89,13 +85,10 @@ const deleteProduct = async (req, res) => {
             throw new CustomError('Product not found', ErrorType.NOT_FOUND)
         }
 
-        if (user.role === 'Admin' || existingProduct.owner.toString() === user._id.toString()){
-            await productRepository.delete(pid)
-            io.emit('deleteProduct', pid)
-            res.sendStatus(200)
-        } else {
-            throw new CustomError('Permission denied', ErrorType.UNAUTHORIZED)
-        }
+        await productRepository.delete(pid)
+        io.emit('deleteProduct', pid)
+        res.sendStatus(200)
+    
     } catch (error) {
         logger.error(error)
         res.sendStatus(500)
