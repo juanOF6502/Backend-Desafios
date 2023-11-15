@@ -67,6 +67,9 @@ const login = async (email, password, done) => {
             return done(null, false)
         }
 
+        existingUser.last_connection = new Date().toLocaleString()
+        await existingUser.save()
+
         done(null, existingUser)
     } catch (error) {
         logger.error(error)

@@ -12,9 +12,21 @@ const userRepository = ManagerFactory.getManagerInstace('users')
 
 
 const logout = async (req, res) => {
-    const { firstname } = req.user
+    const { firstname, email } = req.user
+
+    try {
+        const user = await userRepository.getByEmail(email)
+
+        if (user) {
+            user.last_connection = new Date().toLocaleString()
+            await user.save()
+        }
+    } catch (error) {
+        logger.error(error)
+    }
+
     req.logOut((error) => {
-        if(!error){
+        if (!error) {
             res.render('logout', {
                 name: firstname
             })

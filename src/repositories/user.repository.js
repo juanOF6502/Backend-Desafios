@@ -7,7 +7,7 @@ class UserRepository extends Repository {
     }
 
     async getByEmail(email){
-        return await userModel.findOne({email}).lean()
+        return await userModel.findOne({email})
     }
 
     async populateUser(id){
@@ -30,6 +30,10 @@ class UserRepository extends Repository {
         } catch (error) {
             throw error
         }
+    }
+
+    async getByIdExec(id){
+        return await userModel.findById({ _id: id })
     }
 }
 
