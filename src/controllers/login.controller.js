@@ -18,7 +18,7 @@ const logout = async (req, res) => {
         const user = await userRepository.getByEmail(email)
 
         if (user) {
-            user.last_connection = new Date().toLocaleString()
+            user.last_connection = new Date()
             await user.save()
         }
     } catch (error) {

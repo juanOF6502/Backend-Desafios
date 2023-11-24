@@ -6,12 +6,64 @@ const { developmentLogger, productionLogger } = require('../logger')
 
 const logger = process.env.NODE_ENV === 'production' ? productionLogger : developmentLogger
 
+const getUsers = async (req,res) => {
+    try {
+        const users = await userRepository.getAll()
+
+        const userData = users.map(user => ({
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            role: user.role,
+            gender: user.gender,
+            age: user.age
+        }))
+
+        res.send({status: 'success', payload: userData})
+    } catch (error) {
+        logger.error(error)
+        throw new CustomError('Error al obtener usuarios', ErrorType.DB_ERROR)
+    }
+}
+
+const deleteUsers = async (req,res) => {
+    try {
+        const maxDate = new Date()
+        maxDate.setDate(maxDate.getDate() - 2)
+        
+        const usersToDelete = await userRepository.findUsers({
+            last_connection: { $lt: maxDate.toISOString() }
+        })
+
+        if (usersToDelete.length > 0) {
+            const deletionResult = await userRepository.deleteMany({
+                last_connection: { $lt: maxDate.toISOString() }
+            })
+
+            res.status(200).json({
+                status: 'success',
+                message: `${deletionResult.deletedCount} usuarios eliminados`
+            })
+        } else {
+            res.status(200).json({
+                status: 'success',
+                message: 'No se encontraron usuarios para eliminar'
+            })
+        }
+
+    } catch (error) {
+        logger.error(error)
+        throw new CustomError('Error al obtener usuarios', ErrorType.GENERAL_ERROR)
+    }
+}
+
+
 const changeUserRole = async (req, res) => {
     const { uid } = req.params
 
     try {
         const user = await userRepository.getById(uid)
-
+        
         if (!user) {
             return res.status(404).json({ message: 'User not found' })
         }
@@ -73,5 +125,7 @@ const uploadFiles = async (req,res) => {
 
 module.exports = { 
     changeUserRole, 
-    uploadFiles 
+    uploadFiles,
+    getUsers,
+    deleteUsers 
 }

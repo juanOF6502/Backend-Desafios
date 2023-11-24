@@ -13,7 +13,7 @@ const schema = new Schema({
         name : String,
         reference : String
     }],
-    last_connection: String
+    last_connection: Date
 })
 
 const userModel = model('users', schema)

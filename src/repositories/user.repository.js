@@ -6,6 +6,14 @@ class UserRepository extends Repository {
         super(userModel)
     }
 
+    async findUsers(filter){
+        return await userModel.find(filter)
+    }
+
+    async deleteMany(filter){
+        return await userModel.deleteMany(filter)
+    }
+
     async getByEmail(email){
         return await userModel.findOne({email})
     }

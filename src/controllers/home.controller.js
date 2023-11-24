@@ -240,6 +240,36 @@ const profileRender = (req, res) => {
 }
 
 
+const usersRender = async (req, res) => {
+    try {
+        const users = await userRepository.getAll()
+        
+        res.render('users', {
+            userData: users,
+            user: req.user ? {
+                ...req.user,
+                isUser: req.user?.role == 'Usuario',
+                isAdmin: req.user?.role == 'Admin'
+            }: null
+        })
+    } catch (error) {
+        logger.error(error)
+        throw new CustomError('Error al obtener usuarios', ErrorType.DB_ERROR)
+    }
+}
+
+const deleteUser = async (req, res) => {
+    try {
+        const userId = req.params.id
+        await userRepository.delete(userId)
+        
+        res.redirect('/admin/users')
+    } catch (error) {
+        logger.error(error)
+        throw new CustomError('Error al eliminar el usuario', ErrorType.DB_ERROR)
+    }
+}
+
 module.exports = {
     homeRender,
     productCategoriesRender,
@@ -248,5 +278,7 @@ module.exports = {
     cartRender,
     purchaseRender,
     chatRender,
-    profileRender
+    profileRender,
+    usersRender,
+    deleteUser
 }

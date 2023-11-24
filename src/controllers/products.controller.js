@@ -1,6 +1,7 @@
 const { CustomError, ErrorType } = require('../errors/custom.error')
 const ManagerFactory = require('../repositories/factory')
 const { developmentLogger, productionLogger } = require('../logger')
+const mailSender = require('../services/mail.sender')
 
 const logger = process.env.NODE_ENV === 'production' ? productionLogger : developmentLogger
 const productRepository = ManagerFactory.getManagerInstace('products')
@@ -77,12 +78,19 @@ const updateProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
     const { pid } = req.params
-    const { io, user } = req
+    const { io } = req
 
     try {
         const existingProduct = await productRepository.getById(pid)
         if (!existingProduct) {
             throw new CustomError('Product not found', ErrorType.NOT_FOUND)
+        }
+
+        const ownerUser = await userRepository.getById(existingProduct.owner)
+        
+        if (ownerUser.isPremium) {
+            const mailBody = `<p>Hola ${ownerUser.email}, tu producto ${existingProduct.title} ha sido eliminado.</p>`
+            await mailSender.send(ownerUser.email, mailBody)
         }
 
         await productRepository.delete(pid)

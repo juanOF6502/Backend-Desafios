@@ -1,0 +1,21 @@
+<div class="container">
+    <ul class="list-group">
+        {{#each userData}}
+            <li class="list-group-item bg-dark text-light d-flex justify-content-between align-items-center mb-2 rounded">
+                <div>
+                    <h5 class="mb-1">Usuario <span>//</span> <strong>{{this.firstname}} {{this.lastname}}</strong></h5>
+                    <p class="mb-0">Email : <strong>{{this.email}}</strong></p>
+                    <p class="mb-0">Rol : <strong>{{this.role}}</strong></p>
+                </div>
+                <div>
+                    <form action="/users/{{this._id}}/edit-role" method="POST">
+                        <button type="submit" class="btn btn-info mb-1 w-100">Editar Rol</button>
+                    </form>
+                    <form action="/users/{{this._id}}/delete" method="POST">
+                        <button type="submit" class="btn btn-danger w-100">Eliminar</button>
+                    </form>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+</div>

@@ -48,23 +48,23 @@
                             Bienvenido, {{user.firstname}}!
                         </button>
                         {{else if user.isAdmin}}
-                        <button class="btn dropdown-toggle text-light fs-5" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn dropdown-toggle text-light fs-5" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Bienvenido, Admin!
                         </button>
                         {{/if}}
                         <ul class="dropdown-menu rounded">
-                            <li>
-                                <a class="dropdown-item" href="/profile">Perfil</a>
-                            </li>
                             {{#if user.isAdmin}}
                                 <li>
-                                    <a class="dropdown-item" href="/">Admin</a>
+                                    <a class="dropdown-item" href="/admin/users">Administrar usuarios</a>
                                 </li>
                             {{else if user.isUser}}
                                 <li>
                                     <a class="dropdown-item" href="/">Usuario</a>
                                 </li>
                             {{/if}}
+                            <li>
+                                <a class="dropdown-item" href="/profile">Perfil</a>
+                            </li>
                             <li>
                                 <a class="dropdown-item" href="/logout">Logout</a>
                             </li>
