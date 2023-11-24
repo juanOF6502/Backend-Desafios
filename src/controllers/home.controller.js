@@ -19,11 +19,20 @@ const homeRender = async(req, res) => {
         throw new CustomError('Error obtaining products', ErrorType.DB_ERROR)
     }
 
-    pageInfo.prevLink = pageInfo.hasPrevPage ? `http://localhost:8080/?page=${pageInfo.prevPage}&limit=${limit}` : ''
-    pageInfo.nextLink = pageInfo.hasNextPage ? `http://localhost:8080/?page=${pageInfo.nextPage}&limit=${limit}` : ''
+    let baseUrl = '';
+    if (req.hostname === 'localhost') {
+        baseUrl = `${req.protocol}://${req.hostname}:${process.env.PORT || 8080}`
+    } else {
+        baseUrl = `${req.protocol}://${req.hostname}`
+    }
+
+
+    pageInfo.prevLink = pageInfo.hasPrevPage ? `${baseUrl}/?page=${pageInfo.prevPage}&limit=${limit}` : ''
+    pageInfo.nextLink = pageInfo.hasNextPage ? `${baseUrl}/?page=${pageInfo.nextPage}&limit=${limit}` : ''
 
     const renderData = {
         title: 'Home',
+        baseUrl,
         pageInfo,
         products,
         userCart: req.user.cart._id,
@@ -51,12 +60,14 @@ const productCategoriesRender = async (req, res) => {
         throw new CustomError('Error obtaining products', ErrorType.DB_ERROR)
     }
 
-    pageInfo.prevLink = pageInfo.hasPrevPage ? `http://localhost:8080/?page=${pageInfo.prevPage}&limit=${limit}` : ''
-    pageInfo.nextLink = pageInfo.hasNextPage ? `http://localhost:8080/?page=${pageInfo.nextPage}&limit=${limit}` : ''
+    const baseUrl = `${req.protocol}://${req.hostname}`
 
+    pageInfo.prevLink = pageInfo.hasPrevPage ? `${baseUrl}/?page=${pageInfo.prevPage}&limit=${limit}` : ''
+    pageInfo.nextLink = pageInfo.hasNextPage ? `${baseUrl}/?page=${pageInfo.nextPage}&limit=${limit}` : ''
 
     const renderData = {
         title: 'Home',
+        baseUrl,
         pageInfo,
         products,
         userCart: req.user.cart,
